@@ -18,9 +18,10 @@ import lombok.NoArgsConstructor;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_student;
-    @Column(nullable = false)
-    private String student_name;
+    @Column(name = "id_student", nullable = false)
+    private Long idStudent;
+    @Column(name = "student_name", nullable = false)
+    private String studentName;
     @Column(unique = true, nullable = false)
     private String email;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -17,9 +17,10 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_course;
-    @Column(nullable = false)
-    private String course_name;
+    @Column(name = "id_course")
+    private Long idCourse;
+    @Column(name = "course_name", nullable = false)
+    private String courseName;
     private String description;
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;

@@ -19,7 +19,8 @@ import java.time.LocalDate;
 public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_enrollment;
+    @Column(name = "id_enrollment", nullable = false)
+    private Long idEnrollment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_student", nullable = false)
