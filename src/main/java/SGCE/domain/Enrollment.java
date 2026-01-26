@@ -1,13 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package SGCE.domain;
 
-/**
- *
- * @author javid
- */
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "enrollments", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id_student", "id_course"})
+})
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Enrollment {
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_enrollment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_student", nullable = false)
+    private Student student;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_course", nullable = false)
+    private Course course;
+
+    private LocalDate date;
+
+    @Enumerated(EnumType.STRING)
+    private EnrollmentStatus status;
+
+    //TODO: @Getter / @Setter, equals por ID, encapsulación
 }

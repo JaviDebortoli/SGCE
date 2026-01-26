@@ -1,19 +1,30 @@
 package SGCE.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "students")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Student {
     @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_student;
+    @Column(nullable = false)
+    private String student_name;
+    @Column(unique = true, nullable = false)
     private String email;
-    @OneToMany private List<Course> enrollments;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Enrollment> enrollments;
+
+    //TODO: @Getter / @Setter, equals por ID, encapsulación
 }
