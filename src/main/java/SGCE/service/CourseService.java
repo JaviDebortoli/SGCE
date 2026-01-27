@@ -1,6 +1,7 @@
 package SGCE.service;
 
 import SGCE.domain.Course;
+import SGCE.dto.CourseDto;
 import SGCE.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,18 @@ import java.util.List;
 public class CourseService {
     private final CourseRepository courseRepository;
 
-    public Course createCourse(Course course) { return courseRepository.save(course); }
-    public List<Course> getAllCourses() { return courseRepository.findAll(); }
+    public void createCourse(CourseDto course) {
+        courseRepository.save(new Course(
+                course.getCourseName(),
+                course.getCourseDescription()
+                )
+        );
+    }
+
+    public List<CourseDto> getAllCourses() {
+        return courseRepository.findAll()
+                .stream()
+                .map(CourseDto::toCourseDto)
+                .toList();
+    }
 }

@@ -30,6 +30,13 @@ public class Enrollment {
     @JoinColumn(name = "id_course", nullable = false)
     private Course course;
 
+    public Enrollment(EnrollmentStatus status, LocalDate date, Student student, Course course) {
+        this.student = student;
+        this.course = course;
+        this.status = status;
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

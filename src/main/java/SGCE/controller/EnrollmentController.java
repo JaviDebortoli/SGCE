@@ -19,6 +19,12 @@ public class EnrollmentController {
     private final StudentService studentService;
     private final CourseService courseService;
 
+    @GetMapping()
+    public String showEnrollmentForm() {
+        enrollmentService.getAllEnrollments();
+        return "enrollments/form";
+    }
+
     @GetMapping("/new")
     public String showEnrollmentForm(Model model) {
         model.addAttribute("students", studentService.getAllStudents());
