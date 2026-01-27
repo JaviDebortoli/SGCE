@@ -2,16 +2,14 @@ package SGCE.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "students")
-@Data
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,5 +25,19 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
 
-    //TODO: @Getter / @Setter, equals por ID, encapsulación
+    public Student(String email, String studentName) {
+        this.email = email;
+        this.studentName = studentName;
+        this.enrollments = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Student other)) return false;
+        return idStudent != null && idStudent.equals(other.idStudent);
+    }
+
+    @Override
+    public int hashCode() { return getClass().hashCode(); }
 }

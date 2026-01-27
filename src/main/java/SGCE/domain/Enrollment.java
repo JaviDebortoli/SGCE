@@ -1,10 +1,7 @@
 package SGCE.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "enrollments", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id_student", "id_course"})
 })
-@Data
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,6 +18,9 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_enrollment", nullable = false)
     private Long idEnrollment;
+    @Enumerated(EnumType.STRING)
+    private EnrollmentStatus status;
+    private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_student", nullable = false)
@@ -30,10 +30,13 @@ public class Enrollment {
     @JoinColumn(name = "id_course", nullable = false)
     private Course course;
 
-    private LocalDate date;
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Enrollment other)) return false;
+        return idEnrollment != null && idEnrollment.equals(other.idEnrollment);
+    }
 
-    @Enumerated(EnumType.STRING)
-    private EnrollmentStatus status;
-
-    //TODO: @Getter / @Setter, equals por ID, encapsulación
+    @Override
+    public int hashCode() { return getClass().hashCode(); }
 }

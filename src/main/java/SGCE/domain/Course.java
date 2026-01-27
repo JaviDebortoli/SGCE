@@ -1,16 +1,13 @@
 package SGCE.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "courses")
-@Data
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,5 +22,13 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
 
-    //TODO: @Getter / @Setter, equals por ID, encapsulación
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Course other)) return false;
+        return idCourse != null && idCourse.equals(other.idCourse);
+    }
+
+    @Override
+    public int hashCode() { return getClass().hashCode(); }
 }
