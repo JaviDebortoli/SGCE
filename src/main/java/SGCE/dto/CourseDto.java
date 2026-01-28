@@ -10,7 +10,7 @@ import lombok.*;
 public class CourseDto {
     private Long idCourse;
     private String courseName;
-    private String courseDescription;
+    private String description;
 
     public static CourseDto toCourseDto(Course course) {
         return new CourseDto(

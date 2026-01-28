@@ -23,6 +23,9 @@ public class EnrollmentService {
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
 
+    /*
+     * Crea una inscripción
+     */
     public void enrollStudent(Long studentId, Long courseId) {
         // Verifica que el estudiante exista
         Student student = studentRepository.findById(studentId)
@@ -45,6 +48,9 @@ public class EnrollmentService {
         );
     }
 
+    /*
+     * Devuelve todas las inscripciones como DTOs.
+     */
     @Transactional(readOnly = true)
     public List<EnrollmentDto> getAllEnrollments() {
         return enrollmentRepository.findAll()

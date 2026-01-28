@@ -16,7 +16,7 @@ public class CourseService {
     public void createCourse(CourseDto course) {
         courseRepository.save(new Course(
                 course.getCourseName(),
-                course.getCourseDescription()
+                course.getDescription()
                 )
         );
     }

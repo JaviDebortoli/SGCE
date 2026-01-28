@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header :: header"></div>
+
+<h2>Students</h2>
+
+<a th:href="@{/students/new}">New Student</a>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  <tr th:each="s : ${students}">
+    <td th:text="${s.studentName}"></td>
+    <td th:text="${s.email}"></td>
+  </tr>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</html>

@@ -20,13 +20,13 @@ public class StudentController {
     @GetMapping
     public String listStudents(Model model) {
         model.addAttribute("students", studentService.getAllStudents());
-        return "students/list";
+        return "students/students-list";
     }
 
     @GetMapping("/new")
     public String formStudent(Model model) {
         model.addAttribute("student", new Student());
-        return "students/form";
+        return "students/students-form";
     }
 
     @PostMapping

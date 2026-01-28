@@ -22,11 +22,11 @@ public class Enrollment {
     private EnrollmentStatus status;
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_student", nullable = false)
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_course", nullable = false)
     private Course course;
 

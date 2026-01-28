@@ -20,13 +20,13 @@ public class CourseController {
     @GetMapping
     public String listCourses(Model model) {
         model.addAttribute("courses", courseService.getAllCourses());
-        return "courses/list";
+        return "courses/courses-list";
     }
 
     @GetMapping("/new")
     public String formCourse(Model model) {
         model.addAttribute("course", new Course());
-        return "courses/form";
+        return "courses/courses-form";
     }
 
     @PostMapping

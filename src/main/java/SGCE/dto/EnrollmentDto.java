@@ -13,7 +13,7 @@ public class EnrollmentDto {
     private Long idEnrollment;
     private String studentName;
     private String courseName;
-    private LocalDate enrollmentDate;
+    private LocalDate date;
     private String status;
 
 

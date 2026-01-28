@@ -22,14 +22,14 @@ public class EnrollmentController {
     @GetMapping()
     public String showEnrollmentForm() {
         enrollmentService.getAllEnrollments();
-        return "enrollments/form";
+        return "enrollments/enrollments-form";
     }
 
     @GetMapping("/new")
     public String showEnrollmentForm(Model model) {
         model.addAttribute("students", studentService.getAllStudents());
         model.addAttribute("courses", courseService.getAllCourses());
-        return "enrollments/form";
+        return "enrollments/enrollments-form";
     }
 
     @PostMapping
