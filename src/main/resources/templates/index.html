@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white min-h-screen">
+<div class="flex h-screen overflow-hidden">
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 flex-shrink-0 border-r border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex flex-col justify-between">
+        <div class="flex flex-col gap-6 p-6">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary rounded-lg p-2 text-white">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <div>
+                    <h1 class="text-[#111418] dark:text-white text-lg font-bold leading-tight">SGCE Admin</h1>
+                    <p class="text-[#617289] dark:text-slate-400 text-xs">Management System</p>
+                </div>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span class="text-sm">Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors" th:href="@{/students}">
+                    <span class="material-symbols-outlined">group</span>
+                    <span class="text-sm">Students</span>
+
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors" href="#">
+                    <span class="material-symbols-outlined">book_4</span>
+                    <span class="text-sm">Courses</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors" href="#">
+                    <span class="material-symbols-outlined">assignment_ind</span>
+                    <span class="text-sm">Enrollments</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top Navbar -->
+        <header class="h-16 border-b border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex items-center justify-between px-8 z-10">
+            <div class="flex items-center gap-4">
+                <h2 class="text-xl font-bold text-[#111418] dark:text-white">Main Dashboard</h2>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 pl-4 border-l border-[#dbe0e6] dark:border-slate-700">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-semibold text-[#111418] dark:text-white leading-none">Admin User</p>
+                        <p class="text-xs text-[#617289] dark:text-slate-400">System Manager</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-cover bg-center border border-[#dbe0e6]" data-alt="User profile avatar circle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAd4-7yZSXxkhCy0gkrYQzQqQ6DL9ClaJN2wZKUNQ7I9TPg3LPRlCzT2vxP1hd_Xf8k29tjxwzVCPxpRweIJ1wKjcOKNYQ3HuPgbUdS1hcXyxS14GcVg3UNAah7r-DqwuEW-BIBpuTWNmlpy706ixDP-80N6Qxx2M2pYpDSUfYdrWvll4E5uqXshBfikDFIJt5yp7410limgAZci3EBDJyQgZnDQbYY383rwb41wKSVzaQrx5hPcExoexQsRpycfZ8GrONlH_KOiKI');"></div>
+                </div>
+            </div>
+        </header>
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-8 space-y-8">
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm flex items-center gap-5">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[28px]">group</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-[#617289] dark:text-slate-400">Total Students</p>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-2xl font-bold text-[#111418] dark:text-white">1,254</h3>
+                            <span class="text-xs font-bold text-green-500 bg-green-500/10 px-1.5 py-0.5 rounded">+12%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm flex items-center gap-5">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-500 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[28px]">library_books</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-[#617289] dark:text-slate-400">Active Courses</p>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-2xl font-bold text-[#111418] dark:text-white">48</h3>
+                            <span class="text-xs font-bold text-slate-400 bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm flex items-center gap-5">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-500 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[28px]">app_registration</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-[#617289] dark:text-slate-400">Recent Enrollments</p>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-2xl font-bold text-[#111418] dark:text-white">156</h3>
+                            <span class="text-xs font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded">-5%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Activity Table -->
+            <div class="lg:col-span-2 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-[#111418] dark:text-white">Recent Activity</h3>
+                    <button class="text-primary text-sm font-semibold hover:underline">View all</button>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-[#dbe0e6] dark:border-slate-700 overflow-hidden shadow-sm">
+                    <table class="w-full text-left">
+                        <thead class="bg-background-light dark:bg-slate-700/50">
+                        <tr>
+                            <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider">
+                                Student
+                            </th>
+                            <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider">
+                                Course
+                            </th>
+                            <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider">
+                                Date
+                            </th>
+                            <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider text-right">
+                                Status
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#dbe0e6] dark:divide-slate-700">
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 text-sm font-semibold text-[#111418] dark:text-white">Carlos Gomez</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">Java Spring Boot</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">2023-10-24</td>
+                            <td class="px-6 py-4 text-right">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Active</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 text-sm font-semibold text-[#111418] dark:text-white">Ana Martinez</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">UI/UX Design</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">2023-10-23</td>
+                            <td class="px-6 py-4 text-right">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Pending</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 text-sm font-semibold text-[#111418] dark:text-white">Luis Rodriguez
+                            </td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">Database Mgmt</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">2023-10-22</td>
+                            <td class="px-6 py-4 text-right">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Active</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 text-sm font-semibold text-[#111418] dark:text-white">Elena Smith</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">Cloud Computing</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">2023-10-22</td>
+                            <td class="px-6 py-4 text-right">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Active</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 text-sm font-semibold text-[#111418] dark:text-white">John Doe</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">Web Dev 101</td>
+                            <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">2023-10-21</td>
+                            <td class="px-6 py-4 text-right">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Active</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

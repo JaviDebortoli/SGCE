@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="en">
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+<div class="flex flex-col w-full">
+    <!-- Top Navigation Bar -->
+    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-50">
+        <div class="flex items-center gap-4 text-[#111418] dark:text-white">
+            <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+                <span class="material-symbols-outlined">school</span>
+            </div>
+            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">SGCE Admin</h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-8">
+            <nav class="flex items-center gap-6">
+                <a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                   href="#">Dashboard</a>
+                <a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                   href="#">Courses</a>
+                <a class="text-primary text-sm font-bold border-b-2 border-primary py-1" href="#">Students</a>
+                <a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                   href="#">Enrollments</a>
+                <a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                   href="#">Reports</a>
+            </nav>
+            <div class="flex gap-2">
+                <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+            </div>
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200"
+                 data-alt="User profile avatar"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDADIEvyeCNfLBmMH61-QfRfEhSee3cpAGF689iERwt_rCf85rlmwJks9xx-GfvzksyXAUuY2PlMuSPqcq7HqvpTdzAzXpe_446-oetwBSzPii2XAQECZlLcUYVDDM9HINjx8_zN6x0v-2y2kKRAwsTZr8tDdGdVgG5nafUPqa-6PPHc4ufK_rIoPOLI56Qs2-6xAcmf861l1dgvR9gihU2vfdjFDCsqyr7iq-jl2b_lWiSh2T418jYZiYh4lxWWhp2az53_a_jNAE");'>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumbs -->
+        <div class="flex items-center gap-2 mb-4 text-sm">
+            <a class="text-slate-500 dark:text-slate-400 hover:text-primary" href="#">Home</a>
+            <span class="text-slate-400">/</span>
+            <span class="text-slate-900 dark:text-white font-medium">Student Management</span>
+        </div>
+        <!-- Page Heading -->
+        <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+            <div class="flex flex-col gap-1">
+                <h1 class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Student
+                    Management</h1>
+                <p class="text-slate-500 dark:text-slate-400 text-base">Overview of all registered students in the SGCE
+                    system.</p>
+            </div>
+            <button class="flex items-center justify-center gap-2 rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-sm">
+                <span class="material-symbols-outlined text-xl">person_add</span>
+                <span>Add New Student</span>
+            </button>
+        </div>
+        <!-- Content Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <!-- Search and Filters Bar -->
+            <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+                <div class="max-w-md">
+                    <label class="flex flex-col w-full">
+                        <div class="relative flex items-center">
+                            <span class="material-symbols-outlined absolute left-4 text-slate-400">search</span>
+                            <input class="w-full h-11 pl-11 pr-4 rounded-lg bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-primary/20 focus:border-primary text-slate-900 dark:text-white placeholder:text-slate-400 text-sm"
+                                   placeholder="Search by name, email, or career..." value=""/>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <!-- Table Container -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                    <tr class="bg-slate-50 dark:bg-slate-800/50">
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                            ID
+                        </th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                            Full Name
+                        </th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                            Email
+                        </th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                            Career/Program
+                        </th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 text-right">
+                            Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                    <!-- Row 1 -->
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400">#1024</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center font-bold text-xs">
+                                    MG
+                                </div>
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">Maria Gonzalez</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">m.gonzalez@university.edu</td>
+                        <td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                                        Software Engineering
+                                    </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
+                                        title="Edit">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </button>
+                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                                        title="Delete">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400">#1025</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 flex items-center justify-center font-bold text-xs">
+                                    JW
+                                </div>
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">James Wilson</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">j.wilson@university.edu</td>
+                        <td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                                        Data Science
+                                    </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
+                                        title="Edit">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </button>
+                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                                        title="Delete">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Row 3 -->
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400">#1026</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 flex items-center justify-center font-bold text-xs">
+                                    AM
+                                </div>
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">Ana Martinez</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">a.martinez@university.edu</td>
+                        <td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                                        Cybersecurity
+                                    </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
+                                        title="Edit">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </button>
+                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                                        title="Delete">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Row 4 -->
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400">#1027</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 flex items-center justify-center font-bold text-xs">
+                                    RC
+                                </div>
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">Robert Chen</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">r.chen@university.edu</td>
+                        <td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                                        Software Engineering
+                                    </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
+                                        title="Edit">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </button>
+                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                                        title="Delete">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Row 5 -->
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400">#1028</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-600 flex items-center justify-center font-bold text-xs">
+                                    ER
+                                </div>
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">Elena Rossi</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">e.rossi@university.edu</td>
+                        <td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                                        Artificial Intelligence
+                                    </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
+                                        title="Edit">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </button>
+                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                                        title="Delete">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex items-center justify-between">
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    Showing <span class="font-semibold text-slate-900 dark:text-white">1</span> to <span
+                        class="font-semibold text-slate-900 dark:text-white">5</span> of <span
+                        class="font-semibold text-slate-900 dark:text-white">48</span> results
+                </p>
+                <div class="flex items-center gap-2">
+                    <button class="flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 transition-colors disabled:opacity-50"
+                            disabled="">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-white font-bold text-sm shadow-sm">
+                        1
+                    </button>
+                    <button class="flex items-center justify-center w-9 h-9 rounded-lg border border-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm">
+                        2
+                    </button>
+                    <button class="flex items-center justify-center w-9 h-9 rounded-lg border border-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm">
+                        3
+                    </button>
+                    <span class="text-slate-400 px-1">...</span>
+                    <button class="flex items-center justify-center w-9 h-9 rounded-lg border border-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm">
+                        10
+                    </button>
+                    <button class="flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 transition-colors">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
