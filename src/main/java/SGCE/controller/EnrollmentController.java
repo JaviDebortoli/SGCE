@@ -13,7 +13,7 @@ public class EnrollmentController {
 
     @GetMapping()
     public String showEnrollmentForm() {
-        enrollmentService.getAllEnrollments();
+        enrollmentService.getLast5Enrollments();
         return "enrollments/enrollments";
     }
 

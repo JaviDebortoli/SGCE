@@ -45,7 +45,18 @@ public class EnrollmentService {
                 .toList();
     }
 
-    public long getEnrollmentCount() {
-        return enrollmentRepository.count();
+    /*
+     * Devuelve la cantidad de inscripciones.
+     */
+    public long getEnrollmentCount() { return enrollmentRepository.count(); }
+
+    /*
+     * Devuelve las ultimas 5 inscripciones cronológicamente.
+     */
+    public List<EnrollmentDto> getLast5Enrollments() {
+        return enrollmentRepository.findTop5ByOrderByDateDesc()
+                .stream()
+                .map(EnrollmentDto::toEnrollmentDto)
+                .toList();
     }
 }
