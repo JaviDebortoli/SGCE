@@ -131,11 +131,9 @@ El proyecto fue construido como práctica completa de Spring Boot MVC con persis
 Este proyecto está preparado para crecer con nuevas funcionalidades, como:
 
 ✅ Validaciones con @Valid y mensajes de error en formularios
-✅ Reemplazar inputs de IDs por selects desplegables
 ✅ Implementar edición y eliminación (CRUD completo)
 ✅ Agregar paginación y filtros en listados
 ✅ Manejo global de excepciones con @ControllerAdvice
-✅ Convertir el sistema a API REST con @RestController
 ✅ Implementar autenticación y roles con Spring Security
 ✅ Agregar tests unitarios con JUnit y Mockito
 ✅ Dockerización del proyecto para despliegue
