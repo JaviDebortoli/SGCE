@@ -23,12 +23,6 @@ public class CourseController {
         return "courses/courses";
     }
 
-    @GetMapping("/new")
-    public String formCourse(Model model) {
-        model.addAttribute("course", new Course());
-        return "courses/courses-form";
-    }
-
     @PostMapping
     public String saveCourse(@ModelAttribute CourseDto course) {
         courseService.createCourse(course);

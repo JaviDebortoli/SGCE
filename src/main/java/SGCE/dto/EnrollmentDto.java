@@ -11,19 +11,18 @@ import java.time.LocalDate;
 @Builder
 public class EnrollmentDto {
     private Long idEnrollment;
-    private String studentName;
-    private String courseName;
-    private LocalDate date;
     private String status;
-
+    private LocalDate date;
+    private Long idStudent;
+    private Long idCourse;
 
     public static EnrollmentDto toEnrollmentDto(Enrollment enrollment) {
         return new EnrollmentDto(
                 enrollment.getIdEnrollment(),
-                enrollment.getStudent().getStudentName(),
-                enrollment.getCourse().getCourseName(),
+                enrollment.getStatus().toString(),
                 enrollment.getDate(),
-                enrollment.getStatus().name()
-        );
+                enrollment.getCourse().getIdCourse(),
+                enrollment.getStudent().getIdStudent()
+                );
     }
 }

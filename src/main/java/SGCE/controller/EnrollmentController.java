@@ -1,40 +1,25 @@
 package SGCE.controller;
 
-import SGCE.service.CourseService;
 import SGCE.service.EnrollmentService;
-import SGCE.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/enrollments")
 @RequiredArgsConstructor
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
-    private final StudentService studentService;
-    private final CourseService courseService;
 
     @GetMapping()
     public String showEnrollmentForm() {
         enrollmentService.getAllEnrollments();
-        return "enrollments/enrollments-form";
-    }
-
-    @GetMapping("/new")
-    public String showEnrollmentForm(Model model) {
-        model.addAttribute("students", studentService.getAllStudents());
-        model.addAttribute("courses", courseService.getAllCourses());
-        return "enrollments/enrollments-form";
+        return "enrollments/enrollments";
     }
 
     @PostMapping
-    public String enrollStudent(@RequestParam Long studentId, @RequestParam Long courseId) {
-        enrollmentService.enrollStudent(studentId, courseId);
-        return "redirect:/students";
+    public String enrollStudent(@RequestParam Long idStudent, @RequestParam Long idCourse) {
+        enrollmentService.enrollStudent(idStudent, idCourse);
+        return "redirect:/enrollments";
     }
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="en">
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white min-h-screen">
+<div class="flex h-screen overflow-hidden">
+  <!-- Sidebar Navigation -->
+  <aside class="w-64 flex-shrink-0 border-r border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex flex-col justify-between">
+    <div class="flex flex-col gap-6 p-6">
+      <div class="flex items-center gap-3">
+        <div class="bg-primary rounded-lg p-2 text-white">
+          <span class="material-symbols-outlined">school</span>
+        </div>
+        <div>
+          <h1 class="text-[#111418] dark:text-white text-lg font-bold leading-tight">SGCE Admin</h1>
+          <p class="text-[#617289] dark:text-slate-400 text-xs">Management System</p>
+        </div>
+      </div>
+      <nav class="flex flex-col gap-2">
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
+           th:href="@{/}">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="text-sm">Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
+           th:href="@{/students}">
+          <span class="material-symbols-outlined">group</span>
+          <span class="text-sm">Students</span>
+
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
+           th:href="@{/courses}">
+          <span class="material-symbols-outlined">book_4</span>
+          <span class="text-sm">Courses</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium"
+           href="#">
+          <span class="material-symbols-outlined">assignment_ind</span>
+          <span class="text-sm">New Enrollment</span>
+        </a>
+      </nav>
+    </div>
+  </aside>
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top Navbar -->
+    <header class="h-16 border-b border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex items-center justify-between px-8 z-10">
+      <div class="flex items-center gap-4">
+        <h2 class="text-xl font-bold text-[#111418] dark:text-white">Students Management</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3 pl-4 border-l border-[#dbe0e6] dark:border-slate-700">
+          <div class="text-right hidden sm:block">
+            <p class="text-sm font-semibold text-[#111418] dark:text-white leading-none">Admin User</p>
+            <p class="text-xs text-[#617289] dark:text-slate-400">System Manager</p>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-cover bg-center border border-[#dbe0e6]"
+               data-alt="User profile avatar circle"
+               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAd4-7yZSXxkhCy0gkrYQzQqQ6DL9ClaJN2wZKUNQ7I9TPg3LPRlCzT2vxP1hd_Xf8k29tjxwzVCPxpRweIJ1wKjcOKNYQ3HuPgbUdS1hcXyxS14GcVg3UNAah7r-DqwuEW-BIBpuTWNmlpy706ixDP-80N6Qxx2M2pYpDSUfYdrWvll4E5uqXshBfikDFIJt5yp7410limgAZci3EBDJyQgZnDQbYY383rwb41wKSVzaQrx5hPcExoexQsRpycfZ8GrONlH_KOiKI');"></div>
+        </div>
+      </div>
+    </header>
+    <!-- Registration -->
+    <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 overflow-hidden">
+      <div class="flex items-center gap-2 mb-6">
+        <div class="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-primary rounded">
+          <span class="material-symbols-outlined text-lg block">bolt</span>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Add New Enrollment</h3>
+        <span class="text-xs text-slate-400 font-normal ml-2 uppercase tracking-wide">Rapid entry mode</span>
+      </div>
+      <form th:action="@{/enrollments}" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-slate-500 uppercase ml-1">Student ID</label>
+          <div class="relative">
+            <input
+                    name="idStudent"
+                    type="text"
+                    placeholder="Student ID"
+                    class="w-full h-11 pl-4 rounded-lg bg-slate-50 border"
+                    required
+            />
+          </div>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-slate-500 uppercase ml-1">Course ID</label>
+          <div class="relative">
+            <input
+                    name="idCourse"
+                    type="text"
+                    placeholder="Course ID"
+                    class="w-full h-11 pl-4 rounded-lg bg-slate-50 border"
+                    required
+            />
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <button type="submit" class="w-full h-11 rounded-lg bg-primary text-white">
+            Register Student
+          </button>
+        </div>
+      </form>
+      <div class="mt-4 flex items-center gap-2 text-[11px] text-slate-400">
+        <span class="material-symbols-outlined text-[14px]">info</span>
+        <span>Pressing Enter will also submit the form. The system will automatically assign the next available ID.</span>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

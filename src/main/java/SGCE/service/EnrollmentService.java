@@ -1,9 +1,7 @@
 package SGCE.service;
 
-import SGCE.domain.Course;
 import SGCE.domain.Enrollment;
 import SGCE.domain.EnrollmentStatus;
-import SGCE.domain.Student;
 import SGCE.dto.EnrollmentDto;
 import SGCE.repository.CourseRepository;
 import SGCE.repository.EnrollmentRepository;
@@ -26,24 +24,13 @@ public class EnrollmentService {
     /*
      * Crea una inscripción
      */
-    public void enrollStudent(Long studentId, Long courseId) {
-        // Verifica que el estudiante exista
-        Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("Student not found"));;
-        // Verifica que el curso exista
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Course not found"));;
-        // Verifica que el estudiante no este inscripto ya al curso
-        enrollmentRepository.findByStudentAndCourse(student, course)
-                .ifPresent(e -> {
-                    throw new RuntimeException("Student already enrolled");
-                });
+    public void enrollStudent(Long idStudent, Long idCourse) {
         // Crea la nueva inscripción
         enrollmentRepository.save(new Enrollment(
                 EnrollmentStatus.ACTIVE,
                 LocalDate.now(),
-                student,
-                course
+                studentRepository.findById(idStudent).orElse(null),
+                courseRepository.findById(idCourse).orElse(null)
                 )
         );
     }
