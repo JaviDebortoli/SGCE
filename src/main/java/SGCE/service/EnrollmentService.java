@@ -25,7 +25,6 @@ public class EnrollmentService {
      * Crea una inscripción
      */
     public void enrollStudent(Long idStudent, Long idCourse) {
-        // Crea la nueva inscripción
         enrollmentRepository.save(new Enrollment(
                 EnrollmentStatus.ACTIVE,
                 LocalDate.now(),
@@ -44,5 +43,9 @@ public class EnrollmentService {
                 .stream()
                 .map(EnrollmentDto::toEnrollmentDto)
                 .toList();
+    }
+
+    public long getEnrollmentCount() {
+        return enrollmentRepository.count();
     }
 }

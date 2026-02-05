@@ -35,4 +35,8 @@ public class CourseService {
         return courseRepository.findById(idCourse).map(CourseDto::toCourseDto)
                 .orElse(null);
     }
+
+    public long getCourseCount() {
+        return courseRepository.count();
+    }
 }

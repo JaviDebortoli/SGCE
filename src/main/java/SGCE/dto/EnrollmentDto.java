@@ -13,16 +13,16 @@ public class EnrollmentDto {
     private Long idEnrollment;
     private String status;
     private LocalDate date;
-    private Long idStudent;
-    private Long idCourse;
+    private String courseName;
+    private String studentName;
 
     public static EnrollmentDto toEnrollmentDto(Enrollment enrollment) {
         return new EnrollmentDto(
                 enrollment.getIdEnrollment(),
                 enrollment.getStatus().toString(),
                 enrollment.getDate(),
-                enrollment.getCourse().getIdCourse(),
-                enrollment.getStudent().getIdStudent()
+                enrollment.getCourse().getCourseName(),
+                enrollment.getStudent().getStudentName()
                 );
     }
 }

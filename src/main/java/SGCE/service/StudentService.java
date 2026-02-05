@@ -35,4 +35,8 @@ public class StudentService {
         return studentRepository.findById(idStudent).map(StudentDto::toStudentDto)
                 .orElse(null);
     }
+
+    public long getStudentCount() {
+        return studentRepository.count();
+    }
 }
