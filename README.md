@@ -105,6 +105,7 @@ cd SGCE
 ```
 
 Crear una base de datos:
+
 CREATE DATABASE sgce_db;
 
 Editar el archivo application.properties:
@@ -114,9 +115,11 @@ spring.datasource.password=tu_password
 spring.jpa.hibernate.ddl-auto=update
 
 Ejecutar la aplicación
+
 mvn spring-boot:run
 
 Accede desde el navegador
+
 http://localhost:8080/
 
 📌 Estado del proyecto
@@ -130,13 +133,13 @@ El proyecto fue construido como práctica completa de Spring Boot MVC con persis
 
 Este proyecto está preparado para crecer con nuevas funcionalidades, como:
 
-✅ Validaciones con @Valid y mensajes de error en formularios
-✅ Implementar edición y eliminación (CRUD completo)
-✅ Agregar paginación y filtros en listados
-✅ Manejo global de excepciones con @ControllerAdvice
-✅ Implementar autenticación y roles con Spring Security
-✅ Agregar tests unitarios con JUnit y Mockito
-✅ Dockerización del proyecto para despliegue
+- Validaciones con @Valid y mensajes de error en formularios
+- Implementar edición y eliminación (CRUD completo)
+- Agregar paginación y filtros en listados
+- Manejo global de excepciones con @ControllerAdvice
+- Implementar autenticación y roles con Spring Security
+- Agregar tests unitarios con JUnit y Mockito
+- Dockerización del proyecto para despliegue
 
 ✍️ Autor
 
