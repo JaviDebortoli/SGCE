@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" class="light" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="light">
 <div th:replace="~{fragments/head :: head}"></div>
 
-<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white min-h-screen">
-<div class="flex h-screen overflow-hidden">
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white">
+<div class="flex min-h-screen">
     <!-- Sidebar Navigation -->
     <aside class="w-64 flex-shrink-0 border-r border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex flex-col justify-between">
         <div class="flex flex-col gap-6 p-6">
@@ -26,7 +26,6 @@
                    href="#">
                     <span class="material-symbols-outlined">group</span>
                     <span class="text-sm">Students</span>
-
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
                    th:href="@{/courses}">
@@ -34,7 +33,7 @@
                     <span class="text-sm">Courses</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
-                   th:href="@{/enrollments}">
+                   th:href="@{/enrollments/new}">
                     <span class="material-symbols-outlined">assignment_ind</span>
                     <span class="text-sm">New Enrollment</span>
                 </a>
@@ -42,120 +41,89 @@
         </div>
     </aside>
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col overflow-hidden">
+    <main class="flex-1 flex flex-col">
         <!-- Top Navbar -->
-        <header class="h-16 border-b border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex items-center justify-between px-8 z-10">
-            <div class="flex items-center gap-4">
-                <h2 class="text-xl font-bold text-[#111418] dark:text-white">Students Management</h2>
-            </div>
-            <div class="flex items-center gap-6">
-                <div class="flex items-center gap-3 pl-4 border-l border-[#dbe0e6] dark:border-slate-700">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-sm font-semibold text-[#111418] dark:text-white leading-none">Admin User</p>
-                        <p class="text-xs text-[#617289] dark:text-slate-400">System Manager</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-full bg-cover bg-center border border-[#dbe0e6]"
-                         data-alt="User profile avatar circle"
-                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAd4-7yZSXxkhCy0gkrYQzQqQ6DL9ClaJN2wZKUNQ7I9TPg3LPRlCzT2vxP1hd_Xf8k29tjxwzVCPxpRweIJ1wKjcOKNYQ3HuPgbUdS1hcXyxS14GcVg3UNAah7r-DqwuEW-BIBpuTWNmlpy706ixDP-80N6Qxx2M2pYpDSUfYdrWvll4E5uqXshBfikDFIJt5yp7410limgAZci3EBDJyQgZnDQbYY383rwb41wKSVzaQrx5hPcExoexQsRpycfZ8GrONlH_KOiKI');"></div>
-                </div>
-            </div>
+        <header class="h-16 flex items-center justify-between px-8 border-b border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark">
+            <h2 class="text-xl font-bold">Students Management</h2>
         </header>
-        <!-- Content Card -->
-        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-            <!-- Table Container -->
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                    <tr class="bg-slate-50 dark:bg-slate-800/50">
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                            ID
-                        </th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+        <!-- Scrollable Page Content -->
+        <div class="flex-1 overflow-y-auto p-8 space-y-10">
+            <!-- Registration Form -->
+            <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+                <h3 class="text-lg font-bold mb-6">Quick Registration</h3>
+                <form th:action="@{/students}" method="post"
+                      class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase">
                             Full Name
-                        </th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                        </label>
+                        <input name="studentName"
+                               type="text"
+                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
+                               required>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase">
                             Email
-                        </th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 text-right">
-                            Actions
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                    <!-- Rows -->
-                    <tr th:each="s : ${students}" class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                        <td th:text="${s.idStudent}" class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400"></td>
-                        <td th:text="${s.studentName}" class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center font-bold text-xs">
-                                    MG
-                                </div>
-                                <span class="text-sm font-semibold text-slate-900 dark:text-white"></span>
-                            </div>
-                        </td>
-                        <td th:text="${s.email}" class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"></td>
-                        <td class="px-6 py-4 text-right">
-                            <div class="flex justify-end gap-2">
-                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
-                                        title="Edit">
-                                    <span class="material-symbols-outlined text-xl">edit</span>
-                                </button>
-                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
-                                        title="Delete">
-                                    <span class="material-symbols-outlined text-xl">delete</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- Registration -->
-        <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 overflow-hidden">
-            <div class="flex items-center gap-2 mb-6">
-                <div class="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-primary rounded">
-                    <span class="material-symbols-outlined text-lg block">bolt</span>
-                </div>
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Quick Registration</h3>
-                <span class="text-xs text-slate-400 font-normal ml-2 uppercase tracking-wide">Rapid entry mode</span>
-            </div>
-            <form action="/students" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                <div class="flex flex-col gap-1.5">
-                    <label class="text-xs font-bold text-slate-500 uppercase ml-1">Full Name</label>
-                    <div class="relative">
-                        <input
-                                name="studentName"
-                                type="text"
-                                placeholder="e.g. John Doe"
-                                class="w-full h-11 pl-4 rounded-lg bg-slate-50 border"
-                                required
-                        />
+                        </label>
+                        <input name="email"
+                               type="email"
+                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
+                               required>
                     </div>
-                </div>
-                <div class="flex flex-col gap-1.5">
-                    <label class="text-xs font-bold text-slate-500 uppercase ml-1">Email</label>
-                    <div class="relative">
-                        <input
-                                name="email"
-                                type="email"
-                                placeholder="j.doe@university.edu"
-                                class="w-full h-11 pl-4 rounded-lg bg-slate-50 border"
-                                required
-                        />
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <button type="submit" class="w-full h-11 rounded-lg bg-primary text-white">
+                    <button type="submit"
+                            class="w-full h-11 rounded-lg bg-primary text-white font-semibold">
                         Register Student
                     </button>
+                </form>
+            </section>
+            <!-- Students Table -->
+            <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-200 dark:border-slate-800">
+                    <h3 class="text-lg font-bold">Students List</h3>
                 </div>
-            </form>
-            <div class="mt-4 flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="material-symbols-outlined text-[14px]">info</span>
-                <span>Pressing Enter will also submit the form. The system will automatically assign the next available ID.</span>
-            </div>
-        </section>
+                <!-- Table Wrapper -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50">
+                        <tr>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                Full Name
+                            </th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                Email
+                            </th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">
+                                Actions
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tr th:each="s : ${students}"
+                            class="hover:bg-slate-50 dark:hover:bg-slate-800/30">
+                            <td class="px-6 py-4 font-medium"
+                                th:text="${s.studentName}">
+                            </td>
+                            <td class="px-6 py-4 text-slate-600 dark:text-slate-300"
+                                th:text="${s.email}">
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button class="p-1.5 rounded hover:bg-primary/10 text-primary">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="p-1.5 rounded hover:bg-red-50 text-red-500">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </section>
+        </div>
     </main>
 </div>
 </body>

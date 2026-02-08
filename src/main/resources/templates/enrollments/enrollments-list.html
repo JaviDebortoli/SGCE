@@ -17,8 +17,8 @@
                 </div>
             </div>
             <nav class="flex flex-col gap-2">
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium"
-                   href="#">
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
+                   th:href="@{/}">
                     <span class="material-symbols-outlined">dashboard</span>
                     <span class="text-sm">Dashboard</span>
                 </a>
@@ -63,55 +63,16 @@
         </header>
         <!-- Scrollable Content -->
         <div class="flex-1 overflow-y-auto p-8 space-y-8">
-            <!-- Stats Row -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm flex items-center gap-5">
-                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[28px]">group</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-[#617289] dark:text-slate-400">Total Students</p>
-                        <div class="flex items-center gap-2">
-                            <h3 class="text-2xl font-bold text-[#111418] dark:text-white"
-                                th:text="${totalStudents}"></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm flex items-center gap-5">
-                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-500 rounded-xl flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[28px]">library_books</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-[#617289] dark:text-slate-400">Active Courses</p>
-                        <div class="flex items-center gap-2">
-                            <h3 class="text-2xl font-bold text-[#111418] dark:text-white"
-                                th:text="${totalCourses}"></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm flex items-center gap-5">
-                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-500 rounded-xl flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[28px]">app_registration</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-[#617289] dark:text-slate-400">Total Enrollments</p>
-                        <div class="flex items-center gap-2">
-                            <h3 class="text-2xl font-bold text-[#111418] dark:text-white"
-                                th:text="${totalEnrollments}"></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Activity Table -->
             <div class="lg:col-span-2 space-y-4">
                 <!-- Header -->
                 <div class="flex items-center justify-between">
                     <h3 class="text-lg font-bold text-[#111418] dark:text-white">
-                        Recent Activity
+                        All enrollments
                     </h3>
-                    <a th:href="@{/enrollments}"
+                    <a th:href="@{/}"
                        class="text-primary text-sm font-semibold hover:underline">
-                        View all
+                        Back
                     </a>
                 </div>
                 <!-- Card Container -->
