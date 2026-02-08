@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping
     public String home(Model model) {
-        model.addAttribute("enrollments",enrollmentService.getAllEnrollments());
+        model.addAttribute("enrollments",enrollmentService.getLast5Enrollments());
         model.addAttribute("totalEnrollments", enrollmentService.getEnrollmentCount());
         model.addAttribute("totalStudents",studentService.getStudentCount());
         model.addAttribute("totalCourses",courseService.getCourseCount());

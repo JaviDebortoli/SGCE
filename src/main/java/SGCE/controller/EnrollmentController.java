@@ -3,6 +3,7 @@ package SGCE.controller;
 import SGCE.service.EnrollmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -12,8 +13,8 @@ public class EnrollmentController {
     private final EnrollmentService enrollmentService;
 
     @GetMapping()
-    public String showEnrollmentForm() {
-        enrollmentService.getLast5Enrollments();
+    public String listEnrollments(Model model) {
+        enrollmentService.getAllEnrollments();
         return "enrollments/enrollments";
     }
 

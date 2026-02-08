@@ -75,7 +75,7 @@ Incluye:
 
 - Home principal para navegación
 - Vistas separadas para Students, Courses y Enrollments
-- Fragmentos reutilizables (`head`, `header`, `footer`)
+- Fragmentos reutilizables (`head`)
 - Estilos modernos con TailwindCSS
 
 ---
@@ -97,49 +97,27 @@ Incluye:
 
 ## 🚀 Ejecución del proyecto
 
-Clonar el repositorio
-
+### Clonar el repositorio
 ```bash
 git clone https://github.com/JaviDebortoli/SGCE.git
 cd SGCE
 ```
 
-Crear una base de datos:
-
+### Crear una base de datos:
 CREATE DATABASE sgce_db;
 
-Editar el archivo application.properties:
+### Editar el archivo application.properties:
 spring.datasource.url=jdbc:mysql://localhost:3306/sgce_db
 spring.datasource.username=tu_usuario
 spring.datasource.password=tu_password
 spring.jpa.hibernate.ddl-auto=update
+spring.jpa.open-in-view=false
 
-Ejecutar la aplicación
-
+### Ejecutar la aplicación
 mvn spring-boot:run
 
-Accede desde el navegador
-
+### Accede desde el navegador
 http://localhost:8080/
-
-📌 Estado del proyecto
-
-Actualmente el sistema se encuentra funcional y permite operar con Estudiantes
-Cursos e Inscripciones
-
-El proyecto fue construido como práctica completa de Spring Boot MVC con persistencia real.
-
-🔮 Posibles mejoras futuras
-
-Este proyecto está preparado para crecer con nuevas funcionalidades, como:
-
-- Validaciones con @Valid y mensajes de error en formularios
-- Implementar edición y eliminación (CRUD completo)
-- Agregar paginación y filtros en listados
-- Manejo global de excepciones con @ControllerAdvice
-- Implementar autenticación y roles con Spring Security
-- Agregar tests unitarios con JUnit y Mockito
-- Dockerización del proyecto para despliegue
 
 ✍️ Autor
 

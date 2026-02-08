@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" class="light" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
 <div th:replace="~{fragments/head :: head}"></div>
 
 <body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white min-h-screen">
@@ -46,7 +46,7 @@
         <!-- Top Navbar -->
         <header class="h-16 border-b border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex items-center justify-between px-8 z-10">
             <div class="flex items-center gap-4">
-                <h2 class="text-xl font-bold text-[#111418] dark:text-white">Students Management</h2>
+                <h2 class="text-xl font-bold text-[#111418] dark:text-white">Main Dashboard</h2>
             </div>
             <div class="flex items-center gap-6">
                 <div class="flex items-center gap-3 pl-4 border-l border-[#dbe0e6] dark:border-slate-700">
@@ -56,63 +56,78 @@
                     </div>
                     <div class="w-10 h-10 rounded-full bg-cover bg-center border border-[#dbe0e6]"
                          data-alt="User profile avatar circle"
-                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAd4-7yZSXxkhCy0gkrYQzQqQ6DL9ClaJN2wZKUNQ7I9TPg3LPRlCzT2vxP1hd_Xf8k29tjxwzVCPxpRweIJ1wKjcOKNYQ3HuPgbUdS1hcXyxS14GcVg3UNAah7r-DqwuEW-BIBpuTWNmlpy706ixDP-80N6Qxx2M2pYpDSUfYdrWvll4E5uqXshBfikDFIJt5yp7410limgAZci3EBDJyQgZnDQbYY383rwb41wKSVzaQrx5hPcExoexQsRpycfZ8GrONlH_KOiKI');"></div>
+                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAd4-7yZSXxkhCy0gkrYQzQqQ6DL9ClaJN2wZKUNQ7I9TPg3LPRlCzT2vxP1hd_Xf8k29tjxwzVCPxpRweIJ1wKjcOKNYQ3HuPgbUdS1hcXyxS14GcVg3UNAah7r-DqwuEW-BIBpuTWNmlpy706ixDP-80N6Qxx2M2pYpDSUfYdrWvll4E5uqXshBfikDFIJt5yp7410limgAZci3EBDJyQgZnDQbYY383rwb41wKSVzaQrx5hPcExoexQsRpycfZ8GrONlH_KOiKI');">
+                    </div>
                 </div>
             </div>
         </header>
-        <!-- Content Card -->
-        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-            <!-- Table Container -->
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                    <tr class="bg-slate-50 dark:bg-slate-800/50">
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                            ID
-                        </th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                            Course Name
-                        </th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                            Description
-                        </th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 text-right">
-                            Actions
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                    <!-- Rows -->
-                    <tr th:each="c : ${courses}" class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                        <td th:text="${c.idCourse}" class="px-6 py-4 text-sm font-medium text-slate-500 dark:text-slate-400"></td>
-                        <td th:text="${c.courseName}" class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center font-bold text-xs">
-                                    MG
-                                </div>
-                                <span class="text-sm font-semibold text-slate-900 dark:text-white"></span>
-                            </div>
-                        </td>
-                        <td th:text="${c.description}" class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300"></td>
-                        <td class="px-6 py-4 text-right">
-                            <div class="flex justify-end gap-2">
-                                <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
-                                        title="Edit">
-                                    <span class="material-symbols-outlined text-xl">edit</span>
-                                </button>
-                                <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
-                                        title="Delete">
-                                    <span class="material-symbols-outlined text-xl">delete</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-8 space-y-8">
+            <!-- Activity Table -->
+            <div class="lg:col-span-2 space-y-4">
+                <!-- Header -->
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-[#111418] dark:text-white">
+                        Students List
+                    </h3>
+                </div>
+                <!-- Card Container -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-[#dbe0e6] dark:border-slate-700 shadow-sm overflow-hidden">
+                    <!-- Scrollable Table Wrapper -->
+                    <div class="max-h-[400px] overflow-y-auto">
+                        <table class="w-full text-left">
+                            <!-- Table Head -->
+                            <thead class="bg-background-light dark:bg-slate-700/50 sticky top-0 z-10">
+                            <tr>
+                                <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider">
+                                    ID
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider">
+                                    Course Name
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider">
+                                    Description
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-[#617289] dark:text-slate-300 uppercase tracking-wider text-right">
+                                    Actions
+                                </th>
+                            </tr>
+                            </thead>
+                            <!-- Table Body -->
+                            <tbody class="divide-y divide-[#dbe0e6] dark:divide-slate-700">
+                            <tr th:each="c : ${courses}"
+                                class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                                <td th:text="${c.idCourse}"
+                                    class="px-6 py-4 text-sm font-semibold text-[#111418] dark:text-white">
+                                </td>
+                                <td th:text="${c.courseName}"
+                                    class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">
+                                </td>
+                                <td th:text="${c.description}"
+                                    class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <button class="p-1.5 rounded hover:bg-primary/10 text-primary transition-colors"
+                                                title="Edit">
+                                            <span class="material-symbols-outlined text-xl">edit</span>
+                                        </button>
+                                        <button class="p-1.5 rounded hover:bg-red-50 text-red-500 transition-colors"
+                                                title="Delete">
+                                            <span class="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Registration -->
-        <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 overflow-hidden">
+        <section
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 overflow-hidden">
             <div class="flex items-center gap-2 mb-6">
                 <div class="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-primary rounded">
                     <span class="material-symbols-outlined text-lg block">bolt</span>
