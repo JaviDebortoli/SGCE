@@ -11,12 +11,14 @@ public class StudentDto {
     private Long idStudent;
     private String studentName;
     private String email;
+    private boolean isActive;
 
     public static StudentDto toStudentDto(Student student) {
-        return new StudentDto(
-                student.getIdStudent(),
-                student.getStudentName(),
-                student.getEmail()
-        );
+        return StudentDto.builder()
+                .idStudent(student.getIdStudent())
+                .studentName(student.getStudentName())
+                .email(student.getEmail())
+                .isActive(student.isActive())
+                .build();
     }
 }

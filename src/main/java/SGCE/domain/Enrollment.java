@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "enrollments", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"id_student", "id_course"})
+        @UniqueConstraint(columnNames = {"id_student", "id_course", "file_number"})
 })
 @Getter @Setter
 @NoArgsConstructor
@@ -18,24 +18,27 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_enrollment", nullable = false)
     private Long idEnrollment;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EnrollmentStatus status;
+
+    @Column(nullable = false)
     private LocalDate date;
 
+    @Column(name = "file_number", nullable = false, unique = true)
+    private int fileNumber;
+
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
+
     @ManyToOne
-    @JoinColumn(name = "id_student", nullable = false)
+    @JoinColumn(name = "id_student", nullable = false, unique = true)
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "id_course", nullable = false)
+    @JoinColumn(name = "id_course", nullable = false, unique = true)
     private Course course;
-
-    public Enrollment(EnrollmentStatus status, LocalDate date, Student student, Course course) {
-        this.student = student;
-        this.course = course;
-        this.status = status;
-        this.date = date;
-    }
 
     @Override
     public boolean equals(Object object) {

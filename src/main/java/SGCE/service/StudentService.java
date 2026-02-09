@@ -14,12 +14,14 @@ import java.util.List;
 public class StudentService {
     private final StudentRepository studentRepository;
 
+    @Transactional
     public void createStudent(StudentDto studentDto) {
-        studentRepository.save(new Student(
-                studentDto.getStudentName(),
-                studentDto.getEmail()
-                )
-        );
+        Student student = new Student();
+        student.setStudentName(studentDto.getStudentName());
+        student.setEmail(studentDto.getEmail());
+        student.setActive(true);
+
+        studentRepository.save(student);
     }
 
     @Transactional(readOnly = true)
@@ -31,12 +33,9 @@ public class StudentService {
     }
 
     @Transactional(readOnly = true)
-    public StudentDto getStudentById(Long idStudent) {
-        return studentRepository.findById(idStudent).map(StudentDto::toStudentDto)
-                .orElse(null);
-    }
-
     public long getStudentCount() {
         return studentRepository.count();
     }
+
+
 }

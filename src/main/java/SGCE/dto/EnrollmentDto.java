@@ -13,16 +13,20 @@ public class EnrollmentDto {
     private Long idEnrollment;
     private String status;
     private LocalDate date;
+    private int fileNumber;
+    private boolean isActive;
     private String courseName;
     private String studentName;
 
     public static EnrollmentDto toEnrollmentDto(Enrollment enrollment) {
-        return new EnrollmentDto(
-                enrollment.getIdEnrollment(),
-                enrollment.getStatus().toString(),
-                enrollment.getDate(),
-                enrollment.getCourse().getCourseName(),
-                enrollment.getStudent().getStudentName()
-                );
+        return EnrollmentDto.builder()
+                .idEnrollment(enrollment.getIdEnrollment())
+                .status(enrollment.getStatus().name())
+                .date(enrollment.getDate())
+                .fileNumber(enrollment.getFileNumber())
+                .isActive(enrollment.isActive())
+                .courseName(enrollment.getCourse().getCourseName())
+                .studentName(enrollment.getStudent().getStudentName())
+                .build();
     }
 }

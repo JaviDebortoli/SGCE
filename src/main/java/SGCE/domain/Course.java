@@ -7,27 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "courses", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id_course", "code"})
+})
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
     private Long idCourse;
+
+    @Column(nullable = false, unique = true)
+    private int code;
+
     @Column(name = "course_name", nullable = false)
     private String courseName;
-    private String description;
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Enrollment> enrollments;
 
-    public Course(String courseName, String description) {
-        this.courseName = courseName;
-        this.description = description;
-        this.enrollments = new ArrayList<>();
-    }
+    @Column(nullable = false)
+    private String description;
+
+    @OneToMany(mappedBy = "course")
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     @Override
     public boolean equals(Object object) {
