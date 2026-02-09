@@ -1,6 +1,6 @@
 package SGCE.controller;
 
-import SGCE.dto.course.CourseDto;
+import SGCE.dto.course.CourseCreateDto;
 import SGCE.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class CourseController {
     }
 
     @PostMapping
-    public String saveCourse(@ModelAttribute CourseDto course) {
+    public String saveCourse(@ModelAttribute CourseCreateDto course) {
         courseService.createCourse(course);
         return "redirect:/courses";
     }

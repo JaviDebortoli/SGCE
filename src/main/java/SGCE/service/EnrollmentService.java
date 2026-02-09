@@ -2,6 +2,7 @@ package SGCE.service;
 
 import SGCE.domain.Enrollment;
 import SGCE.domain.EnrollmentStatus;
+import SGCE.dto.enrollment.EnrollmentCreateDto;
 import SGCE.dto.enrollment.EnrollmentDto;
 import SGCE.repository.CourseRepository;
 import SGCE.repository.EnrollmentRepository;
@@ -15,29 +16,21 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional (readOnly = true)
 public class EnrollmentService {
     private final EnrollmentRepository enrollmentRepository;
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
 
-    /*
-     * Crea una inscripción
-     */
-    public void enrollStudent(Long idStudent, Long idCourse) {
-        enrollmentRepository.save(new Enrollment(
-                EnrollmentStatus.ACTIVE,
-                LocalDate.now(),
-                studentRepository.findById(idStudent).orElse(null),
-                courseRepository.findById(idCourse).orElse(null)
-                )
-        );
+    @Transactional
+    public void enrollStudent(EnrollmentCreateDto enrollmentCreateDto) {
+        Enrollment enrollment = new Enrollment();
+
+        enrollment.setFileNumber(enrollmentCreateDto.getFileNumber());
+
+        // TODO: terminar este service y los controllers
     }
 
-    /*
-     * Devuelve todas las inscripciones como DTOs.
-     */
-    @Transactional(readOnly = true)
     public List<EnrollmentDto> getAllEnrollments() {
         return enrollmentRepository.findAll()
                 .stream()
@@ -45,16 +38,10 @@ public class EnrollmentService {
                 .toList();
     }
 
-    /*
-     * Devuelve la cantidad de inscripciones.
-     */
     public long getEnrollmentCount() { return enrollmentRepository.count(); }
 
-    /*
-     * Devuelve las ultimas 5 inscripciones cronológicamente.
-     */
-    public List<EnrollmentDto> getLast5Enrollments() {
-        return enrollmentRepository.findTop5ByOrderByDateDesc()
+    public List<EnrollmentDto> getLastEnrollmentsActivity() {
+        return enrollmentRepository.findTop5ByOrderByUpdatedAtDesc()
                 .stream()
                 .map(EnrollmentDto::toEnrollmentDto)
                 .toList();

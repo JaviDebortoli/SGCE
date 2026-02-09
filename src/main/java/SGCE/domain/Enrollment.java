@@ -2,10 +2,14 @@ package SGCE.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "enrollments", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id_student", "id_course", "file_number"})
 })
@@ -23,11 +27,16 @@ public class Enrollment {
     @Column(nullable = false)
     private EnrollmentStatus status;
 
-    @Column(nullable = false)
-    private LocalDate date;
-
     @Column(name = "file_number", nullable = false, unique = true)
     private String fileNumber;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;

@@ -34,7 +34,7 @@ public class StudentService {
     @Transactional(readOnly = true)
     public List<StudentDto> getAllStudents() {
         // Recupera todos los estudiantes como lista
-        return studentRepository.findAll()
+        return studentRepository.findByIsActiveTrue()
                 .stream()
                 .map(StudentDto::toStudentDto)
                 .toList();
@@ -42,7 +42,7 @@ public class StudentService {
 
     @Transactional
     public void updateStudent(Long idStudent, StudentUpdateDto studentUpdateDto) {
-        // Buscar Student existente
+        // Buscar estudiante existente
         Student student = studentRepository.findById(idStudent)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Student not found with id: " + idStudent
@@ -51,6 +51,19 @@ public class StudentService {
         student.setStudentName(studentUpdateDto.getStudentName());
         student.setEmail(studentUpdateDto.getEmail());
         student.setActive(studentUpdateDto.isActive());
+        // Guardar cambios
+        studentRepository.save(student);
+    }
+
+    @Transactional
+    public void deleteStudent(Long idStudent) {
+        // Buscar estudiante existente
+        Student student = studentRepository.findById(idStudent)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Student not found with id: " + idStudent
+                ));
+        // Actualizar estado
+        student.setActive(false);
         // Guardar cambios
         studentRepository.save(student);
     }

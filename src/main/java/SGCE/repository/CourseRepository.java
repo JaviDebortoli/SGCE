@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
-    List<Course> findByCourseNameContainingIgnoreCase(String course_name);
+    // Verifica que el codigo del curso sea único
+    boolean existsCourseByCode(String code);
+    // Recuperar todos los cursos activos
+    List<Course> findByIsActiveTrue();
 }

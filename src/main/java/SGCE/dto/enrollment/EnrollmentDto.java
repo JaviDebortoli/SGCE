@@ -4,6 +4,7 @@ import SGCE.domain.Enrollment;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 public class EnrollmentDto {
     private Long idEnrollment;
     private String status;
-    private LocalDate date;
+    private LocalDateTime createdAt;
     private String fileNumber;
     private boolean isActive;
     private String courseName;
@@ -22,7 +23,7 @@ public class EnrollmentDto {
         return EnrollmentDto.builder()
                 .idEnrollment(enrollment.getIdEnrollment())
                 .status(enrollment.getStatus().name())
-                .date(enrollment.getDate())
+                .createdAt(enrollment.getCreatedAt())
                 .fileNumber(enrollment.getFileNumber())
                 .isActive(enrollment.isActive())
                 .courseName(enrollment.getCourse().getCourseName())
