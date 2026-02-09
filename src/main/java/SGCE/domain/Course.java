@@ -20,13 +20,16 @@ public class Course {
     private Long idCourse;
 
     @Column(nullable = false, unique = true)
-    private int code;
+    private String code;
 
     @Column(name = "course_name", nullable = false)
     private String courseName;
 
     @Column(nullable = false)
     private String description;
+
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
 
     @OneToMany(mappedBy = "course")
     private List<Enrollment> enrollments = new ArrayList<>();

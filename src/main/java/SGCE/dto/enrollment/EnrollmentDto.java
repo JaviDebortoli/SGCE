@@ -1,4 +1,4 @@
-package SGCE.dto;
+package SGCE.dto.enrollment;
 
 import SGCE.domain.Enrollment;
 import lombok.*;
@@ -13,7 +13,7 @@ public class EnrollmentDto {
     private Long idEnrollment;
     private String status;
     private LocalDate date;
-    private int fileNumber;
+    private String fileNumber;
     private boolean isActive;
     private String courseName;
     private String studentName;

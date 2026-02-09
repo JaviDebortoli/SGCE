@@ -2,7 +2,7 @@ package SGCE.service;
 
 import SGCE.domain.Enrollment;
 import SGCE.domain.EnrollmentStatus;
-import SGCE.dto.EnrollmentDto;
+import SGCE.dto.enrollment.EnrollmentDto;
 import SGCE.repository.CourseRepository;
 import SGCE.repository.EnrollmentRepository;
 import SGCE.repository.StudentRepository;

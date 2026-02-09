@@ -1,7 +1,9 @@
 package SGCE.service;
 
 import SGCE.domain.Student;
-import SGCE.dto.StudentDto;
+import SGCE.dto.student.StudentCreateDto;
+import SGCE.dto.student.StudentDto;
+import SGCE.dto.student.StudentUpdateDto;
 import SGCE.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,27 +17,44 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     @Transactional
-    public void createStudent(StudentDto studentDto) {
+    public void createStudent(StudentCreateDto studentCreateDto) {
+        // Verificar que el email sea único
+        if ( studentRepository.existsByEmail(studentCreateDto.getEmail()) ) {
+            throw new IllegalArgumentException("Email already registered");
+        }
+        // Crear el nuevo estudiante
         Student student = new Student();
-        student.setStudentName(studentDto.getStudentName());
-        student.setEmail(studentDto.getEmail());
+        student.setStudentName(studentCreateDto.getStudentName());
+        student.setEmail(studentCreateDto.getEmail());
         student.setActive(true);
-
+        // Guardar el nuevo estudiante
         studentRepository.save(student);
     }
 
     @Transactional(readOnly = true)
     public List<StudentDto> getAllStudents() {
+        // Recupera todos los estudiantes como lista
         return studentRepository.findAll()
                 .stream()
                 .map(StudentDto::toStudentDto)
                 .toList();
     }
 
-    @Transactional(readOnly = true)
-    public long getStudentCount() {
-        return studentRepository.count();
+    @Transactional
+    public void updateStudent(Long idStudent, StudentUpdateDto studentUpdateDto) {
+        // Buscar Student existente
+        Student student = studentRepository.findById(idStudent)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Student not found with id: " + idStudent
+                ));
+        // Actualizar campos permitidos
+        student.setStudentName(studentUpdateDto.getStudentName());
+        student.setEmail(studentUpdateDto.getEmail());
+        student.setActive(studentUpdateDto.isActive());
+        // Guardar cambios
+        studentRepository.save(student);
     }
 
-
+    @Transactional(readOnly = true)
+    public long getStudentCount() { return studentRepository.count(); }
 }

@@ -27,7 +27,7 @@ public class Enrollment {
     private LocalDate date;
 
     @Column(name = "file_number", nullable = false, unique = true)
-    private int fileNumber;
+    private String fileNumber;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;

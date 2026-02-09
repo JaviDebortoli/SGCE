@@ -1,4 +1,4 @@
-package SGCE.dto;
+package SGCE.dto.student;
 
 import SGCE.domain.Student;
 import lombok.*;

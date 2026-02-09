@@ -1,7 +1,6 @@
 package SGCE.controller;
 
-import SGCE.domain.Student;
-import SGCE.dto.StudentDto;
+import SGCE.dto.student.StudentCreateDto;
 import SGCE.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public String saveStudent(@ModelAttribute StudentDto student) {
+    public String saveStudent(@ModelAttribute StudentCreateDto student) {
         studentService.createStudent(student);
         return "redirect:/students";
     }

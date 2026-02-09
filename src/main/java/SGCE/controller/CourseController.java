@@ -1,7 +1,6 @@
 package SGCE.controller;
 
-import SGCE.domain.Course;
-import SGCE.dto.CourseDto;
+import SGCE.dto.course.CourseDto;
 import SGCE.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

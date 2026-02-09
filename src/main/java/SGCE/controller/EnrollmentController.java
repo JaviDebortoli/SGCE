@@ -1,10 +1,6 @@
 package SGCE.controller;
 
-import SGCE.dto.CourseDto;
-import SGCE.dto.EnrollmentDto;
-import SGCE.service.CourseService;
 import SGCE.service.EnrollmentService;
-import SGCE.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
