@@ -2,8 +2,6 @@ package SGCE.dto.enrollment;
 
 import SGCE.domain.Enrollment;
 import lombok.*;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter @Setter
@@ -11,7 +9,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class EnrollmentDto {
-    private Long idEnrollment;
     private String status;
     private LocalDateTime createdAt;
     private String fileNumber;
@@ -21,7 +18,6 @@ public class EnrollmentDto {
 
     public static EnrollmentDto toEnrollmentDto(Enrollment enrollment) {
         return EnrollmentDto.builder()
-                .idEnrollment(enrollment.getIdEnrollment())
                 .status(enrollment.getStatus().name())
                 .createdAt(enrollment.getCreatedAt())
                 .fileNumber(enrollment.getFileNumber())

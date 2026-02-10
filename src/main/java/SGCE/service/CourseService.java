@@ -40,19 +40,6 @@ public class CourseService {
     }
 
     @Transactional
-    public void updateCourse(Long idCourse, CourseUpdateDto courseUpdateDto) {
-        // Buscar curso existente
-        Course course = courseRepository.findById(idCourse)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Student not found with id: " + idCourse
-                ));
-        // Actualizar estado del curso
-        course.setActive(courseUpdateDto.isActive());
-        // Guardar cambios
-        courseRepository.save(course);
-    }
-
-    @Transactional
     public void deleteCourse(Long idCourse) {
         // Buscar curso existente
         Course course = courseRepository.findById(idCourse)

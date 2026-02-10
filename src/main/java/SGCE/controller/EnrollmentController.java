@@ -25,7 +25,7 @@ public class EnrollmentController {
 
     @PostMapping
     public String enrollStudent(@RequestParam Long idStudent, @RequestParam Long idCourse) {
-        enrollmentService.enrollStudent(idStudent, idCourse);
+        enrollmentService.createStudent(idStudent, idCourse);
         return "redirect:/enrollments";
     }
 }
