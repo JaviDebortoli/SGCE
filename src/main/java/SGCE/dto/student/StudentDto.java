@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class StudentDto {
     private Long idStudent;
+    private int dni;
     private String studentName;
     private String email;
     private boolean isActive;
@@ -16,6 +17,7 @@ public class StudentDto {
     public static StudentDto toStudentDto(Student student) {
         return StudentDto.builder()
                 .idStudent(student.getIdStudent())
+                .dni(student.getDni())
                 .studentName(student.getStudentName())
                 .email(student.getEmail())
                 .isActive(student.isActive())

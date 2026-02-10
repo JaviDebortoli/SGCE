@@ -8,6 +8,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnrollmentCreateDto {
     private String fileNumber;
-    private Long idStudent;
-    private Long idCourse;
+    private int dni;
+    private String code;
 }

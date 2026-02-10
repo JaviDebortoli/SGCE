@@ -24,15 +24,17 @@ public class EnrollmentService {
     private final CourseRepository courseRepository;
 
     @Transactional
-    public void createStudent(EnrollmentCreateDto enrollmentCreateDto) {
+    public void createEnrollment(EnrollmentCreateDto enrollmentCreateDto) {
         // Encontrar el estudiante
-        Student student = studentRepository.findById(enrollmentCreateDto.getIdStudent())
+        Student student = studentRepository.findByDni(enrollmentCreateDto.getDni())
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Student not found with id: " + enrollmentCreateDto.getIdStudent()
+                        "Student not found with DNI: " + enrollmentCreateDto.getDni()
                 ));
         // Encontrar el curso
-        Course course = courseRepository.findById(enrollmentCreateDto.getIdCourse())
-                .orElseThrow(() -> new IllegalArgumentException("Course not found"));
+        Course course = courseRepository.findByCode(enrollmentCreateDto.getCode())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Course not found with Code: " + enrollmentCreateDto.getCode()
+                ));
         // Crear inscripcion
         Enrollment enrollment = new Enrollment();
         enrollment.setStudent(student);

@@ -20,6 +20,9 @@ public class Student {
     @Column(name = "id_student", nullable = false)
     private Long idStudent;
 
+    @Column(nullable = false, unique = true)
+    private int dni;
+
     @Column(name = "student_name", nullable = false)
     private String studentName;
 
