@@ -1,4 +1,4 @@
-# 📘 SGCE — Sistema de Gestión de Cursos y Estudiantes
+# 📘 SGCE - Sistema de Gestión de Cursos y Estudiantes
 
 SGCE (*Sistema de Gestión de Cursos y Estudiantes*) es una aplicación web desarrollada con **Spring Boot** cuyo objetivo principal es administrar estudiantes, cursos e inscripciones dentro de un entorno académico.
 
