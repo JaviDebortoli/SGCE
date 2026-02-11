@@ -35,7 +35,7 @@
                 <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617289] dark:text-slate-300 hover:bg-background-light dark:hover:bg-slate-800 transition-colors"
                    th:href="@{/enrollments}">
                     <span class="material-symbols-outlined">assignment_ind</span>
-                    <span class="text-sm">New Enrollment</span>
+                    <span class="text-sm">Enrollments</span>
                 </a>
             </nav>
         </div>
@@ -52,13 +52,24 @@
             <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
                 <h3 class="text-lg font-bold mb-6">Quick Registration</h3>
                 <form th:action="@{/students}" method="post"
-                      class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                      class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase">
+                            Student DNI
+                        </label>
+                        <input name="dni"
+                               type="number"
+                               placeholder="12345678"
+                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
+                               required>
+                    </div>
                     <div>
                         <label class="text-xs font-bold text-slate-500 uppercase">
                             Full Name
                         </label>
                         <input name="studentName"
                                type="text"
+                               placeholder="John Doe"
                                class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
                                required>
                     </div>
@@ -68,6 +79,7 @@
                         </label>
                         <input name="email"
                                type="email"
+                               placeholder="johndoe@example.com"
                                class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
                                required>
                     </div>
