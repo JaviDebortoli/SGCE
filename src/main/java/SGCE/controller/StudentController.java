@@ -1,14 +1,12 @@
 package SGCE.controller;
 
 import SGCE.dto.student.StudentCreateDto;
+import SGCE.dto.student.StudentUpdateDto;
 import SGCE.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/students")
@@ -26,5 +24,11 @@ public class StudentController {
     public String saveStudent(@ModelAttribute StudentCreateDto student) {
         studentService.createStudent(student);
         return "redirect:/students";
+    }
+
+    @PutMapping
+    public String updateStudent(@ModelAttribute StudentUpdateDto student) {
+        studentService.updateStudent(student);
+        return "redirect:/students-update";
     }
 }
