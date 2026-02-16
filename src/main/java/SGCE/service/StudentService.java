@@ -50,7 +50,6 @@ public class StudentService {
         // Actualizar campos permitidos
         student.setStudentName(studentUpdateDto.getStudentName());
         student.setEmail(studentUpdateDto.getEmail());
-        student.setActive(studentUpdateDto.isActive());
         // Guardar cambios
         studentRepository.save(student);
     }
@@ -66,6 +65,16 @@ public class StudentService {
         student.setActive(false);
         // Guardar cambios
         studentRepository.save(student);
+    }
+
+    @Transactional(readOnly = true)
+    public StudentDto getStudentById(Long idStudent) {
+        Student student = studentRepository.findById(idStudent)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Student not found with id: " + idStudent
+                ));
+
+        return StudentDto.toStudentDto(student);
     }
 
     @Transactional(readOnly = true)

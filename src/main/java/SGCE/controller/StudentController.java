@@ -26,9 +26,21 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    @PutMapping
+    @GetMapping("/{id}/edit")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        model.addAttribute("student", studentService.getStudentById(id));
+        return "students/students-update";
+    }
+
+    @PostMapping("/{id}/edit")
     public String updateStudent(@ModelAttribute StudentUpdateDto student) {
         studentService.updateStudent(student);
-        return "redirect:/students-update";
+        return "redirect:/students";
+    }
+
+    @PostMapping("/delete")
+    public String deleteStudent(@RequestParam Long idStudent) {
+        studentService.deleteStudent(idStudent);
+        return "redirect:/students";
     }
 }

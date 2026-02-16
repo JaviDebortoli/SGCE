@@ -3,7 +3,7 @@
 <div th:replace="~{fragments/head :: head}"></div>
 
 <body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white">
-<div class="flex min-h-screen">
+<main class="flex min-h-screen">
     <!-- Sidebar Navigation -->
     <aside class="w-64 flex-shrink-0 border-r border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark flex flex-col justify-between">
         <div class="flex flex-col gap-6 p-6">
@@ -23,7 +23,7 @@
                     <span class="text-sm">Dashboard</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium"
-                   href="#">
+                   th:href="@{/students}">
                     <span class="material-symbols-outlined">group</span>
                     <span class="text-sm">Students</span>
                 </a>
@@ -41,106 +41,105 @@
         </div>
     </aside>
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col">
         <!-- Top Navbar -->
         <header class="h-16 flex items-center justify-between px-8 border-b border-[#dbe0e6] dark:border-slate-700 bg-white dark:bg-background-dark">
             <h2 class="text-xl font-bold">Students Management</h2>
         </header>
-        <!-- Scrollable Page Content -->
-        <div class="flex-1 overflow-y-auto p-8 space-y-10">
-            <!-- Registration Form -->
-            <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
-                <h3 class="text-lg font-bold mb-6">Quick Registration</h3>
-                <form th:action="@{/students}" method="post"
-                      class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase">
-                            Student DNI
-                        </label>
-                        <input name="dni"
-                               type="number"
-                               placeholder="12345678"
-                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
-                               required>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase">
-                            Full Name
-                        </label>
-                        <input name="studentName"
-                               type="text"
-                               placeholder="John Doe"
-                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
-                               required>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase">
-                            Email
-                        </label>
-                        <input name="email"
-                               type="email"
-                               placeholder="johndoe@example.com"
-                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
-                               required>
-                    </div>
-                    <button type="submit"
-                            class="w-full h-11 rounded-lg bg-primary text-white font-semibold">
-                        Register Student
-                    </button>
-                </form>
-            </section>
-            <!-- Students Table -->
-            <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-slate-200 dark:border-slate-800">
-                    <h3 class="text-lg font-bold">Students List</h3>
-                </div>
-                <!-- Table Wrapper -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="bg-slate-50 dark:bg-slate-800/50">
-                        <tr>
-                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
-                                Full Name
-                            </th>
-                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
-                                Email
-                            </th>
-                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">
-                                Actions
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                        <tr th:each="s : ${students}"
-                            class="hover:bg-slate-50 dark:hover:bg-slate-800/30">
-                            <td class="px-6 py-4 font-medium"
-                                th:text="${s.studentName}">
-                            </td>
-                            <td class="px-6 py-4 text-slate-600 dark:text-slate-300"
-                                th:text="${s.email}">
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex justify-end gap-2">
-
-                                        <button class="p-1.5 rounded hover:bg-primary/10 text-primary">
-                                            <span class="material-symbols-outlined">edit</span>
-                                        </button>
-
-
-                                        <button class="p-1.5 rounded hover:bg-red-50 text-red-500">
-                                            <span class="material-symbols-outlined">delete</span>
-                                        </button>
-
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="flex mb-4">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a class="inline-flex items-center text-sm font-medium text-primary hover:underline" href="#">
+                            <span class="material-icons text-sm mr-2">people</span>
+                            Students
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <span class="material-icons text-slate-400 text-sm">chevron_right</span>
+                            <span class="ml-1 text-sm font-medium text-slate-500 md:ml-2 dark:text-slate-400">Edit Student</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            <!-- Page Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Edit Student Details</h1>
+                <p class="text-slate-500 dark:text-slate-400 mt-1">Update the profile information
+                    student.</p>
+            </div>
+            <!-- Form Card Container -->
+            <div class="flex justify-center">
+                <div class="w-full max-w-2xl bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+                    <div class="p-8">
+                        <form action="#" class="space-y-6" method="POST">
+                            <!-- Read-only DNI Field -->
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300" for="dni">
+                                    National ID (DNI)
+                                </label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="material-icons text-slate-400 text-lg">lock</span>
+                                    </div>
+                                    <input aria-describedby="dni-description"
+                                           class="block w-full pl-10 pr-3 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-500 rounded-lg cursor-not-allowed focus:ring-0 focus:border-slate-200"
+                                           id="dni" name="dni" readonly="" type="text" value="12345678A"/>
                                 </div>
-                            </td>
-                        </tr>
-                        </tbody>
-
-                    </table>
+                                <p class="text-xs text-slate-400 dark:text-slate-500" id="dni-description">
+                                    The National ID cannot be changed once the student is registered.
+                                </p>
+                            </div>
+                            <!-- Full Name Field -->
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                       for="fullName">
+                                    Full Name <span class="text-primary">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="material-icons text-slate-400 text-lg">person</span>
+                                    </div>
+                                    <input class="block w-full pl-10 pr-3 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                                           id="fullName" name="fullName" required="" type="text" value="John Doe"/>
+                                </div>
+                            </div>
+                            <!-- Email Address Field -->
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                       for="email">
+                                    Email Address <span class="text-primary">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="material-icons text-slate-400 text-lg">email</span>
+                                    </div>
+                                    <input class="block w-full pl-10 pr-3 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                                           id="email" name="email" required="" type="email" value="john.doe@email.com"/>
+                                </div>
+                            </div>
+                            <!-- Decorative Divider -->
+                            <div class="pt-4 border-t border-slate-100 dark:border-slate-800"></div>
+                            <!-- Action Buttons -->
+                            <div class="flex items-center justify-end gap-3">
+                                <button class="px-6 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary bg-transparent rounded-lg transition-colors duration-200"
+                                        type="button">
+                                    Cancel
+                                </button>
+                                <button class="px-8 py-2.5 text-sm font-semibold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-md shadow-primary/20 transition-all duration-200 flex items-center gap-2"
+                                        type="submit">
+                                    <span class="material-icons text-sm">save</span>
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </main>
-</div>
+    </div>
+</main>
 </body>
 </html>
