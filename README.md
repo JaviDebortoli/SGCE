@@ -10,13 +10,13 @@ Este proyecto fue realizado con fines **educativos**, como práctica integral pa
 
 El propósito de SGCE es servir como un proyecto de aprendizaje para:
 
-- Comprender el framework **Spring Boot**
-- Aplicar el patrón de arquitectura en capas
-- Utilizar **Spring MVC** con vistas Thymeleaf
-- Implementar persistencia con **Spring Data JPA + Hibernate**
-- Integrar una base de datos relacional con **MySQL**
-- Trabajar con DTOs y separación de responsabilidades
-- Practicar buenas prácticas de diseño y estructura en proyectos Java
+- Aprender Spring Boot desde cero
+- Aplicar arquitectura en capas
+- Comprender el uso correcto de DTOs
+- Trabajar con JPA / Hibernate
+- Implementar Thymeleaf para vistas dinámicas
+- Aplicar borrado lógico, auditoría y validaciones
+- Simular un sistema real de gestión académica
 
 ---
 
@@ -25,17 +25,40 @@ El propósito de SGCE es servir como un proyecto de aprendizaje para:
 El sistema permite:
 
 ### 👨‍🎓 Gestión de Estudiantes
-- Registrar estudiantes
-- Listar estudiantes disponibles
+- Crear estudiantes
+- Listar solo estudiantes activos
+- Editar nombre y email
+- Mostrar DNI como campo de solo lectura
+- Borrado lógico (activar / desactivar)
+- Validaciones con DTOs
+- Confirmaciones visuales antes de guardar cambios
 
 ### 📚 Gestión de Cursos
-- Registrar cursos
-- Listar cursos existentes
+- Crear cursos
+- Listar cursos activos
+- Eliminar cursos (borrado lógico)
+- Código de curso único
+- Confirmación visual antes de eliminar
 
 ### 🧾 Gestión de Inscripciones (Enrollments)
-- Inscribir estudiantes en cursos mediante IDs
-- Visualizar inscripciones realizadas
-- Manejar estado de inscripción (ACTIVE / CANCELLED)
+- Crear inscripciones asociando estudiante y curso
+- Uso de fileNumber como identificador de inscripción
+- Estados de inscripción: ACTIVE/FINISHED/CANCELLED
+- Visualización de estado con badges de colores dinámicos
+- Listado de enrollments activos
+- Recuperación de los últimos enrollments modificados
+- Auditoría automática (createdAt, updatedAt)
+
+---
+
+## 🗃️ Base de Datos
+- MySQL
+- Claves primarias autogeneradas
+- Constraints de unicidad (email, dni, code, file_number)
+- Relaciones:
+  - Student ↔ Enrollment
+  -  Course ↔ Enrollment
+- Borrado lógico sin eliminar registros físicos
 
 ---
 
@@ -52,40 +75,14 @@ El proyecto sigue una arquitectura clásica en capas:
 
 ---
 
-## 🗃️ Modelo de dominio
-
-El sistema está basado en tres entidades principales:
-
-- **Student**: representa un estudiante
-- **Course**: representa un curso
-- **Enrollment**: representa una inscripción (relación entre Student y Course)
-
-Enrollment actúa como entidad intermedia, permitiendo almacenar atributos adicionales como:
-
-- fecha de inscripción
-- estado de inscripción
-
----
-
-## 🖥️ Interfaz Web
-
-La aplicación utiliza **Thymeleaf** como motor de templates para generar vistas dinámicas.
-
-Incluye:
-
-- Home principal para navegación
-- Vistas separadas para Students, Courses y Enrollments
-- Fragmentos reutilizables (`head`)
-- Estilos modernos con TailwindCSS
-
----
-
 ## ⚙️ Tecnologías utilizadas
 
 - **Java 25**
 - **Spring Boot**
 - **Spring MVC**
 - **Spring Data JPA**
+- **Spring Transaction Management**
+- **JPA Auditing**
 - **Hibernate**
 - **MySQL**
 - **Thymeleaf**
