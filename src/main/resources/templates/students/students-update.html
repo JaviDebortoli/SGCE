@@ -74,7 +74,7 @@
             <div class="flex justify-center">
                 <div class="w-full max-w-2xl bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
                     <div class="p-8">
-                        <form action="#" class="space-y-6" method="POST">
+                        <form th:action="@{/students/{id}/edit(id=${idStudent})}" class="space-y-6" method="post">
                             <!-- Read-only DNI Field -->
                             <div class="space-y-2">
                                 <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300" for="dni">
@@ -90,7 +90,7 @@
                                            name="dni"
                                            readonly=""
                                            type="text"
-                                           value="12345678A"/>
+                                           th:value="${student.dni}"/>
                                 </div>
                                 <p class="text-xs text-slate-400 dark:text-slate-500" id="dni-description">
                                     The National ID cannot be changed once the student is registered.
@@ -107,7 +107,11 @@
                                         <span class="material-icons text-slate-400 text-lg">person</span>
                                     </div>
                                     <input class="block w-full pl-10 pr-3 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                                           id="fullName" name="fullName" required="" type="text" value="John Doe"/>
+                                           id="fullName"
+                                           name="studentName"
+                                           type="text"
+                                           th:placeholder="${student.studentName}"
+                                           required/>
                                 </div>
                             </div>
                             <!-- Email Address Field -->
@@ -121,21 +125,31 @@
                                         <span class="material-icons text-slate-400 text-lg">email</span>
                                     </div>
                                     <input class="block w-full pl-10 pr-3 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                                           id="email" name="email" required="" type="email" value="john.doe@email.com"/>
+                                           id="email"
+                                           name="email"
+                                           type="email"
+                                           th:placeholder="${student.email}"
+                                           required/>
                                 </div>
                             </div>
                             <!-- Decorative Divider -->
                             <div class="pt-4 border-t border-slate-100 dark:border-slate-800"></div>
                             <!-- Action Buttons -->
                             <div class="flex items-center justify-end gap-3">
-                                <button class="px-6 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary bg-transparent rounded-lg transition-colors duration-200"
-                                        type="button">
+                                <a class="px-6 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary bg-transparent rounded-lg transition-colors duration-200"
+                                   type="button"
+                                   th:href="@{/students}">
                                     Cancel
-                                </button>
+                                </a>
                                 <button class="px-8 py-2.5 text-sm font-semibold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-md shadow-primary/20 transition-all duration-200 flex items-center gap-2"
-                                        type="submit">
-                                    <span class="material-icons text-sm">save</span>
-                                    Save Changes
+                                        type="submit"
+                                        onclick="return confirm(
+                                          'Update student with:\n' +
+                                          'Name: ' + document.getElementById('fullName').value + '\n' +
+                                          'Email: ' + document.getElementById('email').value
+                                        );">
+                                        <span class="material-icons text-sm">save</span>
+                                        Save Changes
                                 </button>
                             </div>
                         </form>

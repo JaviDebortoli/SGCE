@@ -41,11 +41,11 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(StudentUpdateDto studentUpdateDto) {
+    public void updateStudent(Long idStudent, StudentUpdateDto studentUpdateDto) {
         // Buscar estudiante existente
-        Student student = studentRepository.findByDni(studentUpdateDto.getDni())
+        Student student = studentRepository.findById(idStudent)
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Student not found"
+                        "Student not found with id " + idStudent
                 ));
         // Actualizar campos permitidos
         student.setStudentName(studentUpdateDto.getStudentName());
