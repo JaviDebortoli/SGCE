@@ -1,6 +1,7 @@
 package SGCE.controller;
 
 import SGCE.dto.student.StudentCreateDto;
+import SGCE.dto.student.StudentDto;
 import SGCE.dto.student.StudentUpdateDto;
 import SGCE.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,8 @@ public class StudentController {
     }
 
     @PostMapping("/{id}/edit")
-    public String updateStudent(@ModelAttribute StudentUpdateDto student) {
+    public String updateStudent(@PathVariable Long id, Model model, @ModelAttribute StudentUpdateDto student) {
+        model.addAttribute("student", studentService.getStudentById(id));
         studentService.updateStudent(student);
         return "redirect:/students";
     }
