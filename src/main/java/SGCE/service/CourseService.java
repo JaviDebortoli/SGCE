@@ -3,7 +3,6 @@ package SGCE.service;
 import SGCE.domain.Course;
 import SGCE.dto.course.CourseCreateDto;
 import SGCE.dto.course.CourseDto;
-import SGCE.dto.course.CourseUpdateDto;
 import SGCE.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

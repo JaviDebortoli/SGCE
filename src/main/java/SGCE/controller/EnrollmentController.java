@@ -1,9 +1,8 @@
 package SGCE.controller;
 
+import SGCE.domain.EnrollmentStatus;
 import SGCE.dto.enrollment.EnrollmentCreateDto;
-import SGCE.service.CourseService;
 import SGCE.service.EnrollmentService;
-import SGCE.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
-    private final StudentService studentService;
-    private final CourseService courseService;
 
     @GetMapping()
     public String listEnrollments(Model model) {
@@ -26,6 +23,18 @@ public class EnrollmentController {
     @PostMapping
     public String enrollStudent(@ModelAttribute EnrollmentCreateDto enrollmentCreateDto) {
         enrollmentService.createEnrollment(enrollmentCreateDto);
+        return "redirect:/enrollments";
+    }
+
+    @PostMapping("/delete")
+    public String deleteEnrollment(@RequestParam Long idEnrollment) {
+        enrollmentService.deleteEnrollment(idEnrollment);
+        return "redirect:/enrollments";
+    }
+
+    @PostMapping("/status")
+    public String updateEnrollment(@RequestParam Long idEnrollment, @RequestParam EnrollmentStatus status) {
+        enrollmentService.changeEnrollmentStatus(idEnrollment, status);
         return "redirect:/enrollments";
     }
 }

@@ -6,7 +6,6 @@ import SGCE.domain.EnrollmentStatus;
 import SGCE.domain.Student;
 import SGCE.dto.enrollment.EnrollmentCreateDto;
 import SGCE.dto.enrollment.EnrollmentDto;
-import SGCE.dto.enrollment.EnrollmentUpdateDto;
 import SGCE.repository.CourseRepository;
 import SGCE.repository.EnrollmentRepository;
 import SGCE.repository.StudentRepository;
@@ -62,14 +61,28 @@ public class EnrollmentService {
                 .toList();
     }
 
-    public void deleteEnrollment(Long idEnrollment, EnrollmentUpdateDto enrollmentUpdateDto) {
+    @Transactional
+    public void deleteEnrollment(Long idEnrollment) {
+        // Buscar la inscripcion
+        Enrollment enrollment = enrollmentRepository.findById(idEnrollment)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Enrollment not found with id: " + idEnrollment
+                ));
+        // Borrado lógico
+        enrollment.setActive(false);
+        // Guardar cambios
+        enrollmentRepository.save(enrollment);
+    }
+
+    @Transactional
+    public void changeEnrollmentStatus(Long idEnrollment, EnrollmentStatus status) {
         // Buscar la inscripcion
         Enrollment enrollment = enrollmentRepository.findById(idEnrollment)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Enrollment not found with id: " + idEnrollment
                 ));
         // Cambiar estado
-        enrollment.setActive(false);
+        enrollment.setStatus(status);
         // Guardar cambios
         enrollmentRepository.save(enrollment);
     }
