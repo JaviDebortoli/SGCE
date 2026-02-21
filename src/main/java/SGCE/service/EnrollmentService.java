@@ -52,7 +52,9 @@ public class EnrollmentService {
                 .toList();
     }
 
-    public long getEnrollmentCount() { return enrollmentRepository.count(); }
+    public long getEnrollmentCount() {
+        return enrollmentRepository.countByStatusAndIsActiveTrue(EnrollmentStatus.ACTIVE);
+    }
 
     public List<EnrollmentDto> getLastEnrollmentsActivity() {
         return enrollmentRepository.findTop5ByIsActiveTrueOrderByUpdatedAtDesc()

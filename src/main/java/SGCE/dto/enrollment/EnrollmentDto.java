@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class EnrollmentDto {
+    private Long idEnrollment;
     private String status;
     private LocalDateTime createdAt;
     private String fileNumber;
@@ -18,6 +19,7 @@ public class EnrollmentDto {
 
     public static EnrollmentDto toEnrollmentDto(Enrollment enrollment) {
         return EnrollmentDto.builder()
+                .idEnrollment(enrollment.getIdEnrollment())
                 .status(enrollment.getStatus().name())
                 .createdAt(enrollment.getCreatedAt())
                 .fileNumber(enrollment.getFileNumber())
