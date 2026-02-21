@@ -13,4 +13,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findByIsActiveTrue();
     // Recupera un curso por su código
     Optional<Course> findByCode(String code);
+    // Cantidad de cursos activos
+    long countByIsActiveTrue();
 }

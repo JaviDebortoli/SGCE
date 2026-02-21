@@ -13,4 +13,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findByIsActiveTrue();
     // Recupera un usuario por su dni
     Optional<Student> findByDni(int dni);
+    // Cantidad de estudiantes activos
+    long countByIsActiveTrue();
 }

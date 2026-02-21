@@ -42,11 +42,11 @@ public class Enrollment {
     private boolean isActive;
 
     @ManyToOne
-    @JoinColumn(name = "id_student", nullable = false, unique = true)
+    @JoinColumn(name = "id_student", nullable = false)
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "id_course", nullable = false, unique = true)
+    @JoinColumn(name = "id_course", nullable = false)
     private Course course;
 
     @Override

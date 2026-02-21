@@ -52,5 +52,7 @@ public class CourseService {
     }
 
     @Transactional(readOnly = true)
-    public long getCourseCount() { return courseRepository.count(); }
+    public long getCourseCount() {
+        return courseRepository.countByIsActiveTrue();
+    }
 }

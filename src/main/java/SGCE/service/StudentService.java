@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class StudentService {
     private final StudentRepository studentRepository;
 
@@ -31,7 +32,6 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    @Transactional(readOnly = true)
     public List<StudentDto> getAllStudents() {
         // Recupera todos los estudiantes como lista
         return studentRepository.findByIsActiveTrue()
@@ -67,7 +67,6 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    @Transactional(readOnly = true)
     public StudentDto getStudentById(Long idStudent) {
         Student student = studentRepository.findById(idStudent)
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -77,6 +76,7 @@ public class StudentService {
         return StudentDto.toStudentDto(student);
     }
 
-    @Transactional(readOnly = true)
-    public long getStudentCount() { return studentRepository.count(); }
+    public long getStudentCount() {
+        return studentRepository.countByIsActiveTrue();
+    }
 }
