@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 public class StudentDto {
     private Long idStudent;
-    private int dni;
+    private String dni;
     private String studentName;
     private String email;
     private boolean isActive;

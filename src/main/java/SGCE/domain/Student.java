@@ -21,7 +21,7 @@ public class Student {
     private Long idStudent;
 
     @Column(nullable = false, unique = true)
-    private int dni;
+    private String dni;
 
     @Column(name = "student_name", nullable = false)
     private String studentName;

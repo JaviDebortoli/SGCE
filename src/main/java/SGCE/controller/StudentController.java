@@ -3,9 +3,11 @@ package SGCE.controller;
 import SGCE.dto.student.StudentCreateDto;
 import SGCE.dto.student.StudentUpdateDto;
 import SGCE.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -16,13 +18,21 @@ public class StudentController {
 
     @GetMapping
     public String listStudents(Model model) {
+        model.addAttribute("studentCreateDto", new StudentCreateDto());
         model.addAttribute("students", studentService.getAllStudents());
         return "students/students";
     }
 
     @PostMapping
-    public String saveStudent(@ModelAttribute StudentCreateDto student) {
-        studentService.createStudent(student);
+    public String saveStudent(@Valid @ModelAttribute("studentCreateDto") StudentCreateDto studentCreateDto,
+                              BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("students", studentService.getAllStudents());
+            return "students/students";
+        }
+
+        studentService.createStudent(studentCreateDto);
         return "redirect:/students";
     }
 

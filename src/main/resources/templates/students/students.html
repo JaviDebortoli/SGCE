@@ -51,37 +51,48 @@
             <!-- Registration Form -->
             <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
                 <h3 class="text-lg font-bold mb-6">Quick Registration</h3>
-                <form th:action="@{/students}" method="post"
+                <form th:action="@{/students}"
+                      th:object="${studentCreateDto}"
+                      method="post"
                       class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                     <div>
                         <label class="text-xs font-bold text-slate-500 uppercase">
                             Student DNI
                         </label>
-                        <input name="dni"
-                               type="number"
+                        <input th:field="*{dni}"
+                               type="text"
                                placeholder="12345678"
-                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
-                               required>
+                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border">
+                        <div class="text-red-500 text-xs mt-1"
+                             th:if="${#fields.hasErrors('dni')}"
+                             th:errors="*{dni}">
+                        </div>
                     </div>
                     <div>
                         <label class="text-xs font-bold text-slate-500 uppercase">
                             Full Name
                         </label>
-                        <input name="studentName"
+                        <input th:field="*{studentName}"
                                type="text"
                                placeholder="John Doe"
-                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
-                               required>
+                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border">
+                        <div class="text-red-500 text-xs mt-1"
+                             th:if="${#fields.hasErrors('studentName')}"
+                             th:errors="*{studentName}">
+                        </div>
                     </div>
                     <div>
                         <label class="text-xs font-bold text-slate-500 uppercase">
                             Email
                         </label>
-                        <input name="email"
+                        <input th:field="*{email}"
                                type="email"
                                placeholder="john.doe@email.com"
-                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
-                               required>
+                               class="w-full h-11 px-4 rounded-lg bg-slate-50 border">
+                        <div class="text-red-500 text-xs mt-1"
+                             th:if="${#fields.hasErrors('email')}"
+                             th:errors="*{email}">
+                        </div>
                     </div>
                     <button type="submit"
                             class="w-full h-11 rounded-lg bg-primary text-white font-semibold">
