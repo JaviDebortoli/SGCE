@@ -9,15 +9,15 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor
 public class StudentCreateDto {
-    @NotBlank(message = "El DNI es obligatorio")
-    @Pattern(regexp = "\\d{8}", message = "El DNI debe tener 8 dígitos")
+    @NotBlank(message = "It cannot be empty")
+    @Pattern(regexp = "\\d{8}", message = "Must have 8 digits")
     private String dni;
 
-    @NotBlank(message = "El nombre es obligatorio")
-    @Size(min = 3, max = 100, message = "El nombre del estudiante debe tener entre 3 y 100 caracteres")
+    @NotBlank(message = "It cannot be empty")
+    @Size(min = 3, max = 100, message = "Must be between 3 and 100 characters")
     private String studentName;
 
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "Debe ingresar un email válido")
+    @NotBlank(message = "It cannot be empty")
+    @Email(message = "Must be valid")
     private String email;
 }

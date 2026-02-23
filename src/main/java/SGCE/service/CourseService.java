@@ -26,6 +26,7 @@ public class CourseService {
         course.setCode(courseCreateDto.getCode());
         course.setCourseName(courseCreateDto.getCourseName());
         course.setDescription(courseCreateDto.getDescription());
+        course.setActive(true);
         // Guardar nuevo curso
         courseRepository.save(course);
     }

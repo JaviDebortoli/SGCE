@@ -6,6 +6,7 @@ import SGCE.dto.student.StudentDto;
 import SGCE.dto.student.StudentUpdateDto;
 import SGCE.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,17 +20,20 @@ public class StudentService {
 
     @Transactional
     public void createStudent(StudentCreateDto studentCreateDto) {
-        // Verificar que el email sea único
-        if ( studentRepository.existsByEmail(studentCreateDto.getEmail()) ) {
-            throw new IllegalArgumentException("Email already registered");
-        }
         // Crear el nuevo estudiante
         Student student = new Student();
+        student.setDni(studentCreateDto.getDni());
         student.setStudentName(studentCreateDto.getStudentName());
         student.setEmail(studentCreateDto.getEmail());
         student.setActive(true);
-        // Guardar el nuevo estudiante
-        studentRepository.save(student);
+
+        try {
+            // Guardar el nuevo estudiante
+            studentRepository.save(student);
+        } catch (DataIntegrityViolationException exception) {
+            // Lanzar excepcion por datos ya existentes
+            throw new IllegalArgumentException("Email or DNI already registered");
+        }
     }
 
     public List<StudentDto> getAllStudents() {
@@ -50,8 +54,14 @@ public class StudentService {
         // Actualizar campos permitidos
         student.setStudentName(studentUpdateDto.getStudentName());
         student.setEmail(studentUpdateDto.getEmail());
-        // Guardar cambios
-        studentRepository.save(student);
+
+        try {
+            // Guardar los cambios
+            studentRepository.save(student);
+        } catch (DataIntegrityViolationException exception) {
+            // Lanzar excepcion por datos ya existentes
+            throw new IllegalArgumentException("Email already registered");
+        }
     }
 
     @Transactional
@@ -76,7 +86,5 @@ public class StudentService {
         return StudentDto.toStudentDto(student);
     }
 
-    public long getStudentCount() {
-        return studentRepository.countByIsActiveTrue();
-    }
+    public long getStudentCount() { return studentRepository.countByIsActiveTrue(); }
 }

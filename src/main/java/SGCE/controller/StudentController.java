@@ -24,9 +24,11 @@ public class StudentController {
     }
 
     @PostMapping
-    public String saveStudent(@Valid @ModelAttribute("studentCreateDto") StudentCreateDto studentCreateDto,
-                              BindingResult result, Model model) {
-
+    public String saveStudent(
+            @Valid @ModelAttribute("studentCreateDto") StudentCreateDto studentCreateDto,
+            BindingResult result,
+            Model model
+    ) {
         if (result.hasErrors()) {
             model.addAttribute("students", studentService.getAllStudents());
             return "students/students";
@@ -38,13 +40,24 @@ public class StudentController {
 
     @GetMapping("/{id}/edit")
     public String showUpdateForm(@PathVariable Long id, Model model) {
-        model.addAttribute("student", studentService.getStudentById(id));
+        model.addAttribute("studentUpdateDto", studentService.getStudentById(id));
         model.addAttribute("idStudent", id);
         return "students/students-update";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateStudent(@PathVariable Long id, @ModelAttribute StudentUpdateDto studentUpdateDto) {
+    public String updateStudent(
+            @PathVariable Long id,
+            @Valid @ModelAttribute("studentUpdateDto") StudentUpdateDto studentUpdateDto,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("idStudent", id);
+            model.addAttribute("studentUpdateDto", studentUpdateDto);
+            return "students/students-update";
+        }
+
         studentService.updateStudent(id, studentUpdateDto);
         return "redirect:/students";
     }

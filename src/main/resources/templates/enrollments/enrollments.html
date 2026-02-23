@@ -52,6 +52,7 @@
             <section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
                 <h3 class="text-lg font-bold mb-6">Quick Registration</h3>
                 <form th:action="@{/enrollments}" method="post"
+                      th:object="${enrollmentCreateDto}"
                       class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                     <div>
                         <label class="text-xs font-bold text-slate-500 uppercase">
@@ -59,7 +60,7 @@
                         </label>
                         <input name="fileNumber"
                                type="text"
-                               placeholder="FILE-2026-XXX"
+                               placeholder="FILE-001-YYYY"
                                class="w-full h-11 px-4 rounded-lg bg-slate-50 border"
                                required>
                     </div>

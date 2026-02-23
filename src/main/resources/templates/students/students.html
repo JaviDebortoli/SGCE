@@ -54,7 +54,7 @@
                 <form th:action="@{/students}"
                       th:object="${studentCreateDto}"
                       method="post"
-                      class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                      class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
                         <label class="text-xs font-bold text-slate-500 uppercase">
                             Student DNI
@@ -63,8 +63,7 @@
                                type="text"
                                placeholder="12345678"
                                class="w-full h-11 px-4 rounded-lg bg-slate-50 border">
-                        <div class="text-red-500 text-xs mt-1"
-                             th:if="${#fields.hasErrors('dni')}"
+                        <div class="text-red-500 text-xs mt-1 min-h-[16px]"
                              th:errors="*{dni}">
                         </div>
                     </div>
@@ -76,8 +75,7 @@
                                type="text"
                                placeholder="John Doe"
                                class="w-full h-11 px-4 rounded-lg bg-slate-50 border">
-                        <div class="text-red-500 text-xs mt-1"
-                             th:if="${#fields.hasErrors('studentName')}"
+                        <div class="text-red-500 text-xs mt-1 min-h-[16px]"
                              th:errors="*{studentName}">
                         </div>
                     </div>
@@ -86,18 +84,19 @@
                             Email
                         </label>
                         <input th:field="*{email}"
-                               type="email"
+                               type="text"
                                placeholder="john.doe@email.com"
                                class="w-full h-11 px-4 rounded-lg bg-slate-50 border">
-                        <div class="text-red-500 text-xs mt-1"
-                             th:if="${#fields.hasErrors('email')}"
+                        <div class="text-red-500 text-xs mt-1 min-h-[16px]"
                              th:errors="*{email}">
                         </div>
                     </div>
-                    <button type="submit"
-                            class="w-full h-11 rounded-lg bg-primary text-white font-semibold">
-                        Register Student
-                    </button>
+                    <div class="flex items-end">
+                        <button type="submit"
+                                class="w-full h-11 rounded-lg bg-primary text-white font-semibold">
+                            Register Student
+                        </button>
+                    </div>
                 </form>
             </section>
             <!-- Students Table -->
