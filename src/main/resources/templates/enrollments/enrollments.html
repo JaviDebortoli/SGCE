@@ -133,37 +133,49 @@
                             <td th:text="${e.courseName}"
                                 class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">
                             </td>
-                            <td th:text="${(e.createdAt).toString().replace('T', ' ')}"
+                            <td th:text="${#temporals.format(e.createdAt, 'dd/MM/yyyy HH:mm')}"
                                 class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">
                             </td>
                             <td class="px-6 py-4 text-sm text-[#617289] dark:text-slate-400">
-                                <form th:action="@{/enrollments/status}" method="post">
-                                    <input type="hidden"
-                                           name="idEnrollment"
-                                           th:value="${e.idEnrollment}" />
-                                    <select name="status"
-                                            onchange="if(confirm('Change enrollment status?')){this.form.submit()} else {this.value=this.getAttribute('data-current')}"
-                                            th:attr="data-current=${e.status}"
-                                            th:class="'min-w-[130px] pr-8 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 appearance-none ' +
-                                            (${e.status == 'ACTIVE'} ?
-                                            'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-400' :
-                                            (${e.status == 'FINISHED'} ?
-                                            'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400' :
-                                            'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-400'))">
-                                        <option th:value="ACTIVE"
-                                                th:selected="${e.status == 'ACTIVE'}">
-                                            Active
-                                        </option>
-                                        <option th:value="FINISHED"
-                                                th:selected="${e.status == 'FINISHED'}">
-                                            Finished
-                                        </option>
-                                        <option th:value="CANCELLED"
-                                                th:selected="${e.status == 'CANCELLED'}">
-                                            Cancelled
-                                        </option>
-                                    </select>
-                                </form>
+                                <!-- Con transicion -->
+                                <div th:if="${!#lists.isEmpty(e.allowedStatuses)}">
+                                    <form th:action="@{/enrollments/status}" method="post">
+                                        <input type="hidden"
+                                               name="idEnrollment"
+                                               th:value="${e.idEnrollment}"/>
+                                        <select name="status"
+                                                onchange="if(confirm('Change enrollment status?')){this.form.submit()} else {this.value=this.getAttribute('data-current')}"
+                                                th:attr="data-current=${e.status}"
+                                                th:class="'min-w-[130px] pr-8 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 appearance-none ' +
+                                                (${e.status == 'ACTIVE'} ?
+                                                'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-400' :
+                                                (${e.status == 'FINISHED'} ?
+                                                'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400' :
+                                                'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-400'))">
+                                            <!-- Estado actual -->
+                                            <option th:value="${e.status}"
+                                                    th:text="${e.status}"
+                                                    selected>
+                                            </option>
+                                            <!-- Transiciones permitidas -->
+                                            <option th:each="s : ${e.allowedStatuses}"
+                                                    th:value="${s}"
+                                                    th:text="${s}">
+                                            </option>
+
+                                        </select>
+                                    </form>
+                                </div>
+                                <!-- Sin transicion -->
+                                <div th:if="${#lists.isEmpty(e.allowedStatuses)}"
+                                     th:class="'min-w-[130px] inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium border ' +
+                                     (${e.status == 'ACTIVE'} ?
+                                     'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-400' :
+                                     (${e.status == 'FINISHED'} ?
+                                     'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400' :
+                                     'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-400'))"
+                                     th:text="${e.status}">
+                                </div>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <form th:action="@{/enrollments/delete}" method="post">

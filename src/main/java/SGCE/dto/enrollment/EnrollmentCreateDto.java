@@ -15,7 +15,7 @@ public class EnrollmentCreateDto {
 
     @NotBlank(message = "It cannot be empty")
     @Pattern(regexp = "\\d{8}", message = "Must have 8 digits")
-    private int dni;
+    private String dni;
 
     @NotBlank(message = "It cannot be empty")
     @Pattern(

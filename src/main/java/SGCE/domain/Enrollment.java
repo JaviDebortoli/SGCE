@@ -49,6 +49,16 @@ public class Enrollment {
     @JoinColumn(name = "id_course", nullable = false)
     private Course course;
 
+    public void changeStatus(EnrollmentStatus newStatus) {
+        if (!this.status.canTransitionTo(newStatus)) {
+            throw new IllegalArgumentException(
+                    "Invalid transition from " + status + " to " + newStatus
+            );
+        }
+
+        this.status = newStatus;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

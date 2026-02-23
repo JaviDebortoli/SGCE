@@ -1,8 +1,10 @@
 package SGCE.dto.enrollment;
 
 import SGCE.domain.Enrollment;
+import SGCE.domain.EnrollmentStatus;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -16,6 +18,7 @@ public class EnrollmentDto {
     private boolean isActive;
     private String courseName;
     private String studentName;
+    private Set<EnrollmentStatus> allowedStatuses;
 
     public static EnrollmentDto toEnrollmentDto(Enrollment enrollment) {
         return EnrollmentDto.builder()
@@ -26,6 +29,7 @@ public class EnrollmentDto {
                 .isActive(enrollment.isActive())
                 .courseName(enrollment.getCourse().getCourseName())
                 .studentName(enrollment.getStudent().getStudentName())
+                .allowedStatuses(enrollment.getStatus().allowedTransitions())
                 .build();
     }
 }

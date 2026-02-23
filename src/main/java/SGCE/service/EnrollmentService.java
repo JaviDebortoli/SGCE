@@ -84,8 +84,6 @@ public class EnrollmentService {
                         "Enrollment not found with id: " + idEnrollment
                 ));
         // Cambiar estado
-        enrollment.setStatus(status);
-        // Guardar cambios
-        enrollmentRepository.save(enrollment);
+        enrollment.changeStatus(status);
     }
 }

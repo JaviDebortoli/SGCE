@@ -44,7 +44,9 @@ public class EnrollmentController {
     }
 
     @PostMapping("/status")
-    public String updateEnrollment(@RequestParam Long idEnrollment, @RequestParam EnrollmentStatus status) {
+    public String updateEnrollment(
+            @RequestParam EnrollmentStatus status,
+            @RequestParam Long idEnrollment) {
         enrollmentService.changeEnrollmentStatus(idEnrollment, status);
         return "redirect:/enrollments";
     }
