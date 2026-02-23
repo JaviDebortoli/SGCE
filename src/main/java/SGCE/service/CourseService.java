@@ -48,8 +48,6 @@ public class CourseService {
                 ));
         // Actualizar estado
         course.setActive(false);
-        // Guardar cambios
-        courseRepository.save(course);
     }
 
     @Transactional(readOnly = true)

@@ -45,23 +45,19 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(Long idStudent, StudentUpdateDto studentUpdateDto) {
-        // Buscar estudiante existente
+    public void updateStudent(Long idStudent, StudentUpdateDto dto) {
         Student student = studentRepository.findById(idStudent)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Student not found with id " + idStudent
                 ));
-        // Actualizar campos permitidos
-        student.setStudentName(studentUpdateDto.getStudentName());
-        student.setEmail(studentUpdateDto.getEmail());
-
-        try {
-            // Guardar los cambios
-            studentRepository.save(student);
-        } catch (DataIntegrityViolationException exception) {
-            // Lanzar excepcion por datos ya existentes
+        // Validación de email
+        if (!student.getEmail().equals(dto.getEmail())
+                && studentRepository.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("Email already registered");
         }
+        // Actualizar estudiante
+        student.setStudentName(dto.getStudentName());
+        student.setEmail(dto.getEmail());
     }
 
     @Transactional
@@ -73,8 +69,6 @@ public class StudentService {
                 ));
         // Actualizar estado
         student.setActive(false);
-        // Guardar cambios
-        studentRepository.save(student);
     }
 
     public StudentDto getStudentById(Long idStudent) {

@@ -25,7 +25,8 @@ public class Enrollment {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EnrollmentStatus status;
+    @Setter(AccessLevel.NONE)
+    private EnrollmentStatus status = EnrollmentStatus.ACTIVE;
 
     @Column(name = "file_number", nullable = false, unique = true)
     private String fileNumber;
@@ -50,12 +51,21 @@ public class Enrollment {
     private Course course;
 
     public void changeStatus(EnrollmentStatus newStatus) {
+        // Validar que no sea null
+        if (newStatus == null) {
+            throw new IllegalArgumentException("New status cannot be null");
+        }
+        // Validar que no sea el estado actual
+        if (this.status == newStatus) {
+            return;
+        }
+        // Validar la transicion
         if (!this.status.canTransitionTo(newStatus)) {
             throw new IllegalArgumentException(
                     "Invalid transition from " + status + " to " + newStatus
             );
         }
-
+        // Cambiar estado
         this.status = newStatus;
     }
 

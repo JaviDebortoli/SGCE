@@ -39,7 +39,6 @@ public class EnrollmentService {
         enrollment.setStudent(student);
         enrollment.setCourse(course);
         enrollment.setFileNumber(enrollmentCreateDto.getFileNumber());
-        enrollment.setStatus(EnrollmentStatus.ACTIVE);
         enrollment.setActive(true);
         // Guardar la inscripcion
         enrollmentRepository.save(enrollment);
@@ -72,8 +71,6 @@ public class EnrollmentService {
                 ));
         // Borrado lógico
         enrollment.setActive(false);
-        // Guardar cambios
-        enrollmentRepository.save(enrollment);
     }
 
     @Transactional
