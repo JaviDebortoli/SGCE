@@ -8,15 +8,15 @@ Este proyecto fue realizado con fines **educativos**, como práctica integral pa
 
 ## 🎯 Objetivo del proyecto
 
-El propósito de SGCE es servir como un proyecto de aprendizaje para:
+El propósito de SGCE es servir como proyecto integral para:
 
-- Aprender Spring Boot desde cero
-- Aplicar arquitectura en capas
-- Comprender el uso correcto de DTOs
-- Trabajar con JPA / Hibernate
-- Implementar Thymeleaf para vistas dinámicas
-- Aplicar borrado lógico, auditoría y validaciones
-- Simular un sistema real de gestión académica
+- Aplicar arquitectura en capas (Controller / Service / Repository / Domain)
+- Trabajar con DTOs correctamente separados por caso de uso
+- Implementar validaciones estructurales y reglas de negocio
+- Comprender JPA, Hibernate y el contexto de persistencia
+- Implementar auditoría automática
+- Modelar correctamente estados mediante máquina de estados
+- Construir vistas dinámicas con Thymeleaf
 
 ---
 
@@ -25,25 +25,28 @@ El propósito de SGCE es servir como un proyecto de aprendizaje para:
 El sistema permite:
 
 ### 👨‍🎓 Gestión de Estudiantes
-- Crear estudiantes
-- Listar solo estudiantes activos
+- Crear estudiantes con validaciones
 - Editar nombre y email
-- Mostrar DNI como campo de solo lectura
-- Borrado lógico (activar / desactivar)
-- Validaciones con DTOs
-- Confirmaciones visuales antes de guardar cambios
+- DNI mostrado como campo de solo lectura
+- Borrado lógico (soft delete)
+- Validación de unicidad (DNI y email)
+- Mensajes de error visibles en pantalla
+- Control de reglas de negocio en capa Service
 
 ### 📚 Gestión de Cursos
-- Crear cursos
-- Listar cursos activos
-- Eliminar cursos (borrado lógico)
-- Código de curso único
-- Confirmación visual antes de eliminar
+- Creación de cursos con validaciones
+- Código único por curso
+- Borrado lógico
+- Validación con expresión regular para el código
 
 ### 🧾 Gestión de Inscripciones (Enrollments)
 - Crear inscripciones asociando estudiante y curso
-- Uso de fileNumber como identificador de inscripción
-- Estados de inscripción: ACTIVE/FINISHED/CANCELLED
+- Uso de fileNumber como identificador de inscripción con formato controlado
+- Estados de inscripción implementados con una máquina de estados: ACTIVE/FINISHED/CANCELLED
+  - ACTIVE → FINISHED
+  - ACTIVE → CANCELLED
+  - FINISHED → (estado terminal)
+  - CANCELLED → (estado terminal)
 - Visualización de estado con badges de colores dinámicos
 - Listado de enrollments activos
 - Recuperación de los últimos enrollments modificados
