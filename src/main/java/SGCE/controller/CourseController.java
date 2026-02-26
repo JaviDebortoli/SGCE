@@ -17,7 +17,7 @@ public class CourseController {
 
     @GetMapping
     public String listCourses(Model model) {
-        model.addAttribute("courseCreateDto", new CourseCreateDto());
+        model.addAttribute("courseCreateDto", new CourseCreateDto(null, null, null));
         model.addAttribute("courses", courseService.getAllCourses());
         return "courses/courses";
     }

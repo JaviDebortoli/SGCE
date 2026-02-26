@@ -18,7 +18,7 @@ public class StudentController {
 
     @GetMapping
     public String listStudents(Model model) {
-        model.addAttribute("studentCreateDto", new StudentCreateDto());
+        model.addAttribute("studentCreateDto", new StudentCreateDto(null, null, null));
         model.addAttribute("students", studentService.getAllStudents());
         return "students/students";
     }

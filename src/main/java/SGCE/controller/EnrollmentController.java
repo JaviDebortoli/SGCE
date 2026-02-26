@@ -18,7 +18,7 @@ public class EnrollmentController {
 
     @GetMapping()
     public String listEnrollments(Model model) {
-        model.addAttribute("enrollmentCreateDto", new EnrollmentCreateDto());
+        model.addAttribute("enrollmentCreateDto", new EnrollmentCreateDto(null, null, null));
         model.addAttribute("enrollments",enrollmentService.getAllEnrollments());
         return "enrollments/enrollments";
     }

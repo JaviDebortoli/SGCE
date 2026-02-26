@@ -22,9 +22,9 @@ public class StudentService {
     public void createStudent(StudentCreateDto studentCreateDto) {
         // Crear el nuevo estudiante
         Student student = new Student();
-        student.setDni(studentCreateDto.getDni());
-        student.setStudentName(studentCreateDto.getStudentName());
-        student.setEmail(studentCreateDto.getEmail());
+        student.setDni(studentCreateDto.dni());
+        student.setStudentName(studentCreateDto.studentName());
+        student.setEmail(studentCreateDto.email());
         student.setActive(true);
 
         try {
@@ -45,19 +45,19 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(Long idStudent, StudentUpdateDto dto) {
+    public void updateStudent(Long idStudent, StudentUpdateDto studentUpdateDto) {
         Student student = studentRepository.findById(idStudent)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Student not found with id " + idStudent
                 ));
         // Validación de email
-        if (!student.getEmail().equals(dto.getEmail())
-                && studentRepository.existsByEmail(dto.getEmail())) {
+        if (!student.getEmail().equals(studentUpdateDto.email())
+                && studentRepository.existsByEmail(studentUpdateDto.email())) {
             throw new IllegalArgumentException("Email already registered");
         }
         // Actualizar estudiante
-        student.setStudentName(dto.getStudentName());
-        student.setEmail(dto.getEmail());
+        student.setStudentName(studentUpdateDto.studentName());
+        student.setEmail(studentUpdateDto.email());
     }
 
     @Transactional

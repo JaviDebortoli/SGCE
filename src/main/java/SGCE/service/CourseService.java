@@ -18,14 +18,14 @@ public class CourseService {
     @Transactional
     public void createCourse(CourseCreateDto courseCreateDto) {
         // Verificar que el codigo sea único
-        if ( courseRepository.existsCourseByCode(courseCreateDto.getCode()) ) {
+        if ( courseRepository.existsCourseByCode(courseCreateDto.code()) ) {
             throw new IllegalArgumentException("Code already exists");
         }
         // Crear nuevo curso
         Course course = new Course();
-        course.setCode(courseCreateDto.getCode());
-        course.setCourseName(courseCreateDto.getCourseName());
-        course.setDescription(courseCreateDto.getDescription());
+        course.setCode(courseCreateDto.code());
+        course.setCourseName(courseCreateDto.courseName());
+        course.setDescription(courseCreateDto.description());
         course.setActive(true);
         // Guardar nuevo curso
         courseRepository.save(course);
