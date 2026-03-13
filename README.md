@@ -119,6 +119,8 @@ mvn spring-boot:run
 ### Accede desde el navegador
 http://localhost:8080/
 
-✍️ Autor
+---
+
+##✍️ Autor
 
 Proyecto desarrollado por Javier M. Debórtoli como práctica de aprendizaje en Spring Boot y desarrollo backend en Java.
